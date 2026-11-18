@@ -1,0 +1,8 @@
+node_modules
+dist
+.git
+.env
+*.log
+database.sqlite
+test
+.vscode
