@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>MEMBERS LOGIN | MCS</title>
+  <style>
+    :root { --fg: #fff; --bg: #000; --ease: cubic-bezier(.16,.84,.24,1); --en: "Georgia", "YuMincho", "游明朝", serif; }
+    body { background: var(--bg); color: var(--fg); font-family: sans-serif; display: grid; place-items: center; min-height: 100vh; margin: 0; overflow: hidden; }
+
+    .login-container { width: 100%; max-width: 400px; padding: 40px; border: 1px solid rgba(255,255,255,.2); background: rgba(0,0,0,.8); backdrop-filter: blur(10px); transition: border-color .4s; }
+
+    h1 {
+      position: relative;
+      font: 500 20px/1 var(--en);
+      margin-bottom: 40px;
+      text-align: center;
+      letter-spacing: 0.3em;
+      text-transform: uppercase;
+      display: inline-block;
+      left: 50%;
+      transform: translateX(-50%);
+    }
+
+    h1::after {
+      content: "";
+      position: absolute;
+      left: 0;
+      bottom: -15px;
+      width: 100%;
+      height: 2px;
+      background: linear-gradient(90deg, currentColor 0%, currentColor 20%, transparent 100%);
+      box-shadow: 0 0 10px 1px currentColor;
+      transform: scaleX(0);
+      transform-origin: right;
+      transition: transform .6s var(--ease), box-shadow .4s ease;
+    }
+
+    .login-container:hover h1::after {
+      transform: scaleX(1);
+      transform-origin: left;
+      box-shadow: 0 0 15px 3px currentColor;
+    }
+
+    .input { width: 100%; padding: 15px; margin-bottom: 20px; border: 1px solid #444; background: transparent; color: #fff; box-sizing: border-box; transition: .4s; }
+    .input:focus { border-color: #fff; outline: none; box-shadow: 0 0 10px rgba(255,255,255,.2); }
+
+    .btn { display: block; width: 100%; padding: 15px; background: #fff; color: #000; font-weight: 700; cursor: pointer; border: none; text-align: center; transition: .4s; letter-spacing: .2em; text-transform: uppercase; }
+    .btn:hover { background: #000; color: #fff; border: 1px solid #fff; }
+  </style>
+</head>
+<body>
+  <div class="login-container">
+    <h1>MCS Members login</h1>
+    <form id="loginForm">
+      <input type="text" name="username" class="input" placeholder="ID" required>
+      <input type="password" name="password" class="input" placeholder="PASSWORD" required>
+      <button type="submit" class="btn">SIGN IN</button>
+    </form>
+  </div>
+
+  <script>
+    document.getElementById("loginForm").addEventListener("submit", async (e) => {
+      e.preventDefault();
+      const formData = new FormData(e.target);
+      const data = Object.fromEntries(formData.entries());
+
+      try {
+        const response = await fetch("http://127.0.0.1:3000/auth/login", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(data),
+        });
+
+        if (response.ok) {
+          const result = await response.json();
+          localStorage.setItem("access_token", result.access_token);
+          alert("ログイン成功！");
+          window.location.href = "admin.html";
+        } else {
+          alert("ログイン失敗: IDまたはパスワードが正しくありません。");
+        }
+      } catch (err) {
+        alert("通信エラー: サーバーが起動しているか確認してください。");
+      }
+    });
+  </script>
+</body>
+</html>

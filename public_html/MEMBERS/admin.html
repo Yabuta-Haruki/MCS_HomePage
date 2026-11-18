@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <title>ADMIN DASHBOARD | MCS</title>
+  <style>
+    body { background: #000; color: #fff; font-family: sans-serif; display: grid; place-items: center; min-height: 100vh; margin: 0; }
+    .container { text-align: center; }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>ADMIN DASHBOARD</h1>
+    <p>管理画面へようこそ。</p>
+    <button onclick="localStorage.removeItem('access_token'); window.location.href='login.html';">LOGOUT</button>
+  </div>
+  <script>
+    // ページロード時にトークンチェック
+    if (!localStorage.getItem('access_token')) {
+      alert('権限がありません。ログインしてください。');
+      window.location.href = 'login.html';
+    }
+  </script>
+</body>
+</html>
