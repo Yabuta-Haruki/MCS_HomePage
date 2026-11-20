@@ -1,0 +1,1934 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>MCS | 関西大学メディアクリエイトサークル Media Creative Supporter</title>
+<meta name="description" content="関西大学メディアクリエイトサークル MCS（Media Creative Supporter）。制作局・技術局・広報局・編集局の4つの専門局が連携し、映像制作・ライブ配信・デザイン・情報発信に取り組んでいます。">
+<meta name="theme-color" content="#000000">
+<!--
+  関西大学 ホームページ公開用サーバー（www2.itc.kansai-u.ac.jp）向け構成
+  ・このファイルは public_html/index.html として配置します（トップページのファイル名は index.html）。
+  ・CSS / JavaScript はこのファイル内に記述しています。外部サービス（Webフォント・CDN・解析ツール等）は読み込みません。
+  ・画像は public_html/images/ に置き、"images/ファイル名" の相対パスで指定してください。
+    "/" から始まるパスや "C:\..." "file://..." などPC固有のパスは公開先で表示されません。
+  ・サーバーは常時SSL非対応のため、http→https のリダイレクトは設定しないでください（.htaccess も不要です）。
+-->
+
+<script>
+/* =====================================================================
+   MCS SITE CONFIG  ― 運用前にここを差し替えてください
+   ・URLは https:// から始まる正式なURLを設定すると自動でリンクになります
+   ・プレースホルダーのままの場合、リンクは遷移せず「未設定」の案内を表示します
+   ・image に画像の相対パス（例："images/about-main.jpg"）を設定すると、仮画像の代わりに表示されます
+     ※ 権利処理・人物の公開同意が確認できた画像だけを設定してください
+   ・著作権表示・管理責任者・連絡先・最終更新日は、ページ下部（フッター）のHTMLを直接編集します
+   ・公開前チェック：ページURLの末尾に ?check を付けて開くと、未設定リンク・要確認表記・仮画像の一覧を表示します
+   ===================================================================== */
+window.MCS_CONFIG = {
+
+  /* ---------- 外部リンク（未提供のため明確なプレースホルダー） ---------- */
+  links: {
+    LINE_URL:      "LINE_URL_HERE",       // LINE公式アカウント
+    X_URL:         "X_URL_HERE",          // X（旧Twitter）公式アカウント
+    INSTAGRAM_URL: "INSTAGRAM_URL_HERE",  // Instagram公式アカウント
+    MCSTUBE_URL:   "MCSTUBE_URL_HERE"     // YouTube「MCSTube」
+  },
+
+  /* ---------- フォーム設定 ----------
+     関西大学の公開用サーバーでは「個人情報にあたるものは扱わない」ことが求められているため、
+     既定（false）では入力フォームを表示せず、問い合わせ方法の案内を表示します。
+     true にすると、団体内での確認用にデモフォーム（送信・保存は一切なし）を表示します。
+     公開時は必ず false のままにしてください。 */
+  features: {
+    demoForms: false
+  },
+
+  /* ---------- About セクション画像 ---------- */
+  images: {
+    about_main: { src: "about_main.jpg", alt: "MCSの撮影現場の様子", tone: 2 },
+    about_sub:  { src: "images/about_sub.jpg", alt: "MCSメンバーの活動風景", tone: 5 }
+  },
+
+  /* ---------- 4局データ ---------- */
+  departments: [
+    {
+      id: "production", no: "01", en: "PRODUCTION", ja: "制作局", keyword: "PLAN & DIRECT", icon: "clapper",
+      image: "", imageAlt: "制作局の企画・撮影現場の様子", tone: 0,
+      desc: "映像の企画から構成、撮影の準備、現場での進行演出までを担当。作品の方向性を決め、伝えたい内容を映像として形にします。",
+      tasks: ["映像の企画・構成", "台本・絵コンテ作成", "ロケハン", "撮影現場での進行・演出・ディレクション"]
+    },
+    {
+      id: "technical", no: "02", en: "TECHNICAL", ja: "技術局", keyword: "CAMERA & STREAM", icon: "camera",
+      image: "", imageAlt: "技術局の機材オペレーションの様子", tone: 1,
+      desc: "カメラ・音声・照明などの機材を扱い、ライブ配信やスタジオ運用を技術面から支えます。複数の映像を切り替えながら、現場の様子をリアルタイムで届けます。",
+      tasks: ["カメラ操作", "音声・照明の操作", "スタジオスイッチャー", "スポーツ生中継の機材セッティング", "ライブ配信オペレーション"]
+    },
+    {
+      id: "pr", no: "03", en: "PUBLIC RELATIONS", ja: "広報局", keyword: "SNS & DESIGN", icon: "megaphone",
+      image: "", imageAlt: "広報局が制作したポスターやPOP", tone: 6,
+      desc: "SNSやポスター、POPなどを通じてMCSの魅力を発信。新歓説明会や見学会の企画運営も担当し、団体と学生をつなぎます。",
+      tasks: ["公式X・Instagramの運用", "ポスター・POP制作", "新歓説明会の企画運営", "見学会の企画運営", "サークル情報の発信"]
+    },
+    {
+      id: "editing", no: "04", en: "EDITING", ja: "編集局", keyword: "CUT & EFFECTS", icon: "timeline",
+      image: "", imageAlt: "編集局の映像編集作業の様子", tone: 3,
+      desc: "撮影した映像を編集し、テロップやCG効果、音響効果などを加えて作品を完成させます。映像のテンポや見せ方を整え、伝わる作品に仕上げます。",
+      tasks: ["Adobe Premiere Proによるカット編集", "テロップ制作", "Adobe After EffectsによるCG・映像効果", "音響効果", "映像作品の完成作業"]
+    }
+  ],
+
+  /* ---------- 活動実績データ（指示書の事実のみ掲載） ---------- */
+  activities: [
+    {
+      code: "A", key: "kaisers-tv", category: "LIVE STREAMING", title: "KAISERS TV", sub: "",
+      image: "", imageAlt: "KAISERS TVのスポーツ中継の様子", tone: 4, relatedFilter: "live",
+      desc: "関西大学体育会の試合などをマルチカメラで撮影し、スポーツ中継のライブ配信を行う活動。現場の臨場感を視聴者に届けます。"
+    },
+    {
+      code: "B", key: "broadcast", category: "BROADCAST PRODUCTION", title: "外部メディア番組制作", sub: "J:COM『ジモトトピックス』など",
+      image: "", imageAlt: "外部メディア向け番組の取材風景", tone: 1, relatedFilter: "video",
+      desc: "J:COM『ジモトトピックス』など、大学のSDGsの取り組み等を取材し、番組制作を通して大学の活動を社会へ発信します。"
+    },
+    {
+      code: "C", key: "official", category: "OFFICIAL PROJECTS", title: "大学・地域からの依頼映像", sub: "",
+      image: "", imageAlt: "大学・地域からの依頼映像の撮影風景", tone: 7, relatedFilter: "video",
+      desc: "卒業式動画、高槻市の市制施行記念動画、万博関連『リボーンチャレンジ』の告知動画など、大学や地域に関わる公式依頼の映像制作に取り組みます。"
+    },
+    {
+      code: "D", key: "mcstube", category: "DIGITAL CONTENT", title: "YouTube『MCSTube』", sub: "",
+      image: "", imageAlt: "YouTubeチャンネル『MCSTube』の配信映像", tone: 5, relatedFilter: "video", linkKey: "MCSTUBE_URL",
+      desc: "YouTubeチャンネルを運用し、『MiCS RADIO』、歴代サークルPV、制作映像作品などを配信しています。"
+    },
+    {
+      code: "E", key: "learning", category: "LEARNING SUPPORT", title: "学業サポート", sub: "",
+      image: "", imageAlt: "テスト対策解説動画の制作風景", tone: 2, relatedFilter: "video",
+      desc: "総合情報学部の必修科目に関するテスト対策解説動画を制作・共有し、学習をサポートします。"
+    },
+    {
+      code: "F", key: "events", category: "CAMPUS EVENTS", title: "キャンパスイベント", sub: "",
+      image: "", imageAlt: "オープンキャンパスのスタジオ体験イベントの様子", tone: 0, relatedFilter: "all",
+      desc: "オープンキャンパスでのスタジオ体験イベントや、学園祭での企画・模擬店出店などを通じて、大学の魅力を伝えます。"
+    }
+  ],
+
+  /* ---------- 作品ギャラリー（※すべてサンプルデータ。実際の作品に差し替えてください） ----------
+     category : "video" | "design" | "live"
+     fit      : "cover"（トリミング） | "contain"（全体表示：ポスター等）
+     shape    : 仮画像の縦横比 "landscape" | "portrait" | "square"
+     url      : 公開ページURL（https://〜）。未設定なら空文字
+     youtubeId: YouTube動画ID（11文字）。設定するとモーダル内で埋め込み再生
+     sample   : true の間は「SAMPLE」表示が付きます
+  ------------------------------------------------------------------------------------------ */
+  works: [
+    { title: "SAMPLE｜映像作品タイトル 01", category: "video",  desc: "映像作品の説明文が入ります（サンプル）。実際の作品情報に差し替えてください。", year: "20XX", dept: "制作局・編集局", image: "", imageAlt: "映像作品のサムネイル", fit: "cover",   shape: "landscape", tone: 2, url: "", youtubeId: "", sample: true },
+    { title: "SAMPLE｜ポスター作品タイトル",   category: "design", desc: "ポスター作品の説明文が入ります（サンプル）。", year: "20XX", dept: "広報局", image: "", imageAlt: "ポスター作品", fit: "contain", shape: "portrait", tone: 6, url: "", youtubeId: "", sample: true },
+    { title: "SAMPLE｜ライブ配信アーカイブ 01", category: "live",   desc: "ライブ配信アーカイブの説明文が入ります（サンプル）。", year: "20XX", dept: "技術局", image: "", imageAlt: "ライブ配信アーカイブのサムネイル", fit: "cover", shape: "landscape", tone: 4, url: "", youtubeId: "", sample: true },
+    { title: "SAMPLE｜映像作品タイトル 02", category: "video",  desc: "映像作品の説明文が入ります（サンプル）。", year: "20XX", dept: "編集局", image: "", imageAlt: "映像作品のサムネイル", fit: "cover", shape: "landscape", tone: 1, url: "", youtubeId: "", sample: true },
+    { title: "SAMPLE｜POP作品タイトル",       category: "design", desc: "POP作品の説明文が入ります（サンプル）。", year: "20XX", dept: "広報局", image: "", imageAlt: "POP作品", fit: "contain", shape: "portrait", tone: 3, url: "", youtubeId: "", sample: true },
+    { title: "SAMPLE｜ライブ配信アーカイブ 02", category: "live",   desc: "ライブ配信アーカイブの説明文が入ります（サンプル）。", year: "20XX", dept: "技術局", image: "", imageAlt: "ライブ配信アーカイブのサムネイル", fit: "cover", shape: "landscape", tone: 7, url: "", youtubeId: "", sample: true },
+    { title: "SAMPLE｜映像作品タイトル 03", category: "video",  desc: "映像作品の説明文が入ります（サンプル）。", year: "20XX", dept: "制作局", image: "", imageAlt: "映像作品のサムネイル", fit: "cover", shape: "landscape", tone: 5, url: "", youtubeId: "", sample: true },
+    { title: "SAMPLE｜SNS告知デザイン",       category: "design", desc: "SNS告知用デザインの説明文が入ります（サンプル）。", year: "20XX", dept: "広報局", image: "", imageAlt: "SNS告知デザイン", fit: "contain", shape: "square", tone: 0, url: "", youtubeId: "", sample: true },
+    { title: "SAMPLE｜スタジオ配信アーカイブ", category: "live",   desc: "スタジオ配信アーカイブの説明文が入ります（サンプル）。", year: "20XX", dept: "技術局", image: "", imageAlt: "スタジオ配信アーカイブのサムネイル", fit: "cover", shape: "landscape", tone: 6, url: "", youtubeId: "", sample: true }
+  ],
+
+  /* ---------- FAQ（※回答は仮テキスト。募集条件・活動ルールは断定していません） ----------
+     a はHTML可。サイト内リンク：href="#section-id"、制作依頼フォームを開く場合は data-open-form="request"
+  -------------------------------------------------------------------------------------- */
+  faqs: [
+    { q: "映像制作の経験がなくても入れますか？",
+      a: "MCSでは企画・撮影・配信・編集・デザイン・広報など、さまざまな形でメディアづくりに関われます。各局の仕事内容は<a href=\"#departments\">4局紹介</a>をご覧ください。未経験からの参加に関する最新情報は、新歓説明会・見学会や公式SNSでご確認ください。" },
+    { q: "どの局に所属するかは選べますか？",
+      a: "MCSには制作局・技術局・広報局・編集局の4つの専門局があります。所属の決め方については、説明会や公式SNSで最新の情報をご確認ください。各局の内容は<a href=\"#departments\">こちら</a>から確認できます。" },
+    { q: "カメラや編集ソフトを持っていなくても大丈夫ですか？",
+      a: "機材やソフトウェアの利用環境については、新歓説明会・見学会などでご確認ください。気になる点は<a href=\"#join\">団員募集</a>の案内からお問い合わせいただけます。" },
+    { q: "週にどのくらい活動しますか？",
+      a: "活動頻度は時期やプロジェクトによって異なる場合があります。最新の活動情報は公式SNSをご確認ください。" },
+    { q: "1年生以外でも参加できますか？",
+      a: "募集対象については、公式SNSやLINE公式アカウントで最新情報をご確認ください。<a href=\"#join\">団員募集</a>からもご案内しています。" },
+    { q: "活動の見学はできますか？",
+      a: "見学会などの開催情報は、公式SNSをご確認ください。<a href=\"#join\">団員募集</a>に告知枠を設けています。" },
+    { q: "企業や大学からの制作依頼はできますか？",
+      a: "映像制作・ライブ配信・デザイン制作・取材や番組制作などのご相談については、<a href=\"#contact\" data-open-form=\"request\">お問い合わせ方法</a>をご確認ください。対応可否や条件はご依頼内容に応じてご相談ください。" },
+    { q: "どのような作品を制作していますか？",
+      a: "スポーツのライブ配信（KAISERS TV）、外部メディア向け番組制作、大学・地域からの依頼映像、YouTube『MCSTube』での配信などに取り組んでいます。詳しくは<a href=\"#activities\">活動実績</a>と<a href=\"#works\">作品ギャラリー</a>をご覧ください。" }
+  ]
+};
+document.documentElement.classList.add("js");
+</script>
+
+<style>
+/* =====================================================================
+   MONOCHROME UI × COLORFUL PHOTOGRAPHY
+   UIは黒・白・グレーのみ。画像（写真・作品）にはフィルタや色付き効果を一切かけない。
+   ===================================================================== */
+:root{
+  --black:#000000; --charcoal:#121212; --dark:#333333; --mid:#777777;
+  --light:#F5F5F5; --white:#FFFFFF; --line:#DDDDDD;
+  --line-d:rgba(255,255,255,.16);
+  --fg:#000; --bg:#fff;
+  --en:"MCS Display","Helvetica Neue",Helvetica,Arial,sans-serif;
+  --jp:"Hiragino Kaku Gothic ProN","Hiragino Sans","Yu Gothic Medium","Yu Gothic",YuGothic,Meiryo,"Noto Sans JP",sans-serif;
+  --max:1280px;
+  --gutter:clamp(16px,4vw,56px);
+  --sec:clamp(88px,11vw,168px);
+  --slant:clamp(36px,6vw,104px);
+  --ease:cubic-bezier(.16,.84,.24,1);
+  --header-h:72px;
+}
+/* 閲覧者のPCにあるフォントのみを使用（外部フォントの読み込みなし） */
+@font-face{font-family:"MCS Display";font-weight:800 900;src:local("Arial Black"),local("Arial-Black"),local("Helvetica Neue Black"),local("HelveticaNeue-Black"),local("Roboto Black"),local("Roboto-Black")}
+@font-face{font-family:"MCS Display";font-weight:500 700;src:local("Helvetica Neue Bold"),local("HelveticaNeue-Bold"),local("Arial Bold"),local("Arial-BoldMT"),local("Roboto Bold"),local("Roboto-Bold")}
+@font-face{font-family:"MCS Display";font-weight:400;src:local("Helvetica Neue"),local("HelveticaNeue"),local("Arial"),local("ArialMT"),local("Roboto"),local("Roboto-Regular")}
+@font-face{font-family:"MCS Display";font-weight:100 300;src:local("Helvetica Neue Thin"),local("HelveticaNeue-Thin"),local("HelveticaNeue-UltraLight"),local("Segoe UI Light"),local("SegoeUI-Light"),local("Roboto Light"),local("Roboto-Light"),local("Arial")}
+*,*::before,*::after{box-sizing:border-box}
+html{scroll-behavior:smooth;scroll-padding-top:calc(var(--header-h) + 8px);-webkit-text-size-adjust:100%}
+html.is-locked{overflow:hidden}
+body{margin:0;font-family:var(--jp);font-size:16px;line-height:1.85;color:var(--black);background:var(--white);-webkit-font-smoothing:antialiased;overflow-x:hidden}
+img{display:block;max-width:100%}
+a{color:inherit;text-decoration:none}
+button,input,select,textarea{font:inherit;color:inherit}
+button{cursor:pointer;background:none;border:0;padding:0}
+h1,h2,h3,h4,p,ul,ol,figure,dl,dd{margin:0}
+ul,ol{padding:0;list-style:none}
+::selection{background:#000;color:#fff}
+.is-dark ::selection{background:#fff;color:#000}
+.is-dark{--fg:#fff;--bg:#000;color:#fff;background:#000}
+:focus-visible{outline:2px solid var(--fg);outline-offset:3px}
+.visually-hidden{position:absolute!important;width:1px;height:1px;margin:-1px;padding:0;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap;border:0}
+.skip-link{position:fixed;left:16px;top:-120px;z-index:1000;background:#fff;color:#000;padding:12px 18px;border:2px solid #000;font-weight:700}
+.skip-link:focus{top:16px}
+.container{width:min(100% - 2*var(--gutter), var(--max));margin-inline:auto}
+
+/* ---------- Typography ---------- */
+.eyebrow{display:inline-flex;align-items:center;gap:14px;font-family:var(--en);font-size:12px;font-weight:500;letter-spacing:.3em;text-transform:uppercase;line-height:1.4}
+.eyebrow::before{content:"";width:36px;height:1px;background:currentColor;flex:none}
+.display{font-family:var(--en);font-weight:900;letter-spacing:-.035em;line-height:.88;font-size:clamp(40px,9.5vw,152px);text-transform:uppercase;margin-top:22px}
+.display .thin{font-weight:200;letter-spacing:-.02em}
+.outline-text{color:transparent;-webkit-text-stroke:1.2px var(--fg)}
+.ja-head{font-weight:900;font-size:clamp(22px,3vw,42px);line-height:1.45;letter-spacing:.02em;font-feature-settings:"palt";word-break:auto-phrase}
+.lead{font-size:clamp(15px,1.15vw,17px);line-height:2;color:var(--dark)}
+.is-dark .lead{color:rgba(255,255,255,.74)}
+
+/* ---------- Section frame ---------- */
+.sec{position:relative;padding-block:var(--sec);overflow:hidden;overflow:clip}
+.slant{clip-path:polygon(0 var(--slant),100% 0,100% 100%,0 100%);margin-top:calc(var(--slant) * -1);padding-top:calc(var(--sec) + var(--slant))}
+.slant--rev{clip-path:polygon(0 0,100% var(--slant),100% 100%,0 100%)}
+.sec-head{display:grid;grid-template-columns:1.25fr 1fr;gap:clamp(24px,5vw,80px);align-items:end;margin-bottom:clamp(48px,7vw,104px);position:relative;z-index:1}
+.sec-head .ja-head{margin-top:clamp(18px,2.4vw,28px)}
+.sec-head .lead{max-width:34em}
+
+/* ---------- Buttons ---------- */
+.btn{--b-bg:#fff;--b-fg:#000;--b-bd:#fff;display:inline-flex;align-items:center;justify-content:center;gap:14px;min-height:56px;padding:14px 28px;border:1px solid var(--b-bd);background:var(--b-bg);color:var(--b-fg);font-weight:700;font-size:15px;letter-spacing:.04em;line-height:1.35;transition:background-color .35s var(--ease),color .35s var(--ease),border-color .35s var(--ease);cursor:pointer;text-align:left}
+.btn svg{flex:none;transition:transform .35s var(--ease)}
+.btn:hover svg{transform:translateX(4px)}
+.btn--white:hover{--b-bg:#000;--b-fg:#fff;--b-bd:#fff}
+.btn--ghost{--b-bg:#000;--b-fg:#fff;--b-bd:#fff}
+.btn--ghost:hover{--b-bg:#fff;--b-fg:#000}
+.btn--black{--b-bg:#000;--b-fg:#fff;--b-bd:#000}
+.btn--black:hover{--b-bg:#fff;--b-fg:#000}
+.btn--line{--b-bg:transparent;--b-fg:#000;--b-bd:#000}
+.btn--line:hover{--b-bg:#000;--b-fg:#fff}
+.btn-sub{display:block;font:500 11px/1.3 var(--en);letter-spacing:.2em;opacity:.7;margin-bottom:3px}
+.is-unset{cursor:help}
+.text-link{display:inline-flex;align-items:center;gap:10px;font-weight:700;font-size:14px;letter-spacing:.04em;border-bottom:1px solid currentColor;padding-bottom:4px;cursor:pointer}
+.text-link svg{transition:transform .35s var(--ease)}
+.text-link:hover svg{transform:translateX(5px)}
+.tag{display:inline-block;font:600 11px/1 var(--en);letter-spacing:.2em;text-transform:uppercase;padding:7px 10px;border:1px solid currentColor}
+
+/* ---------- Media (images keep their colors: NO filter / NO overlay) ---------- */
+.media{position:relative;overflow:hidden;background:var(--charcoal)}
+.media img{width:100%;height:100%;object-fit:cover;transition:transform .9s var(--ease)}
+.media--contain img{object-fit:contain;padding:7%}
+
+/* ---------- Spheres ---------- */
+.sphere{border-radius:50%;background:radial-gradient(circle at 34% 30%,#fff 0%,#e8e8e8 4%,#a0a0a0 15%,#4f4f4f 34%,#1e1e1e 56%,#080808 76%,#000 100%);box-shadow:inset -28px -40px 90px rgba(0,0,0,.85),inset 10px 14px 40px rgba(255,255,255,.16),0 0 0 1px rgba(255,255,255,.06)}
+.sphere::after{content:"";position:absolute;inset:0;border-radius:50%;background:radial-gradient(circle at 74% 82%,rgba(255,255,255,.22),transparent 36%)}
+.sphere--light{background:radial-gradient(circle at 34% 28%,#fff 0%,#f7f7f7 18%,#d6d6d6 44%,#9a9a9a 74%,#6a6a6a 100%);box-shadow:inset -20px -30px 60px rgba(0,0,0,.18),0 40px 80px rgba(0,0,0,.12)}
+.sphere--light::after{display:none}
+@keyframes float{0%,100%{transform:translate(0,0)}50%{transform:translate(-14px,22px)}}
+@keyframes spin{to{transform:rotate(360deg)}}
+@keyframes lineUp{to{transform:translateY(0)}}
+@keyframes fadeUp{from{opacity:0;transform:translateY(24px)}to{opacity:1;transform:none}}
+@keyframes ruleIn{to{transform:scaleX(1)}}
+@keyframes scrollBar{0%{transform:translateY(-100%)}100%{transform:translateY(260%)}}
+@keyframes ticker{to{transform:translateX(-50%)}}
+
+/* ---------- Reveal ---------- */
+.js .reveal{opacity:0;transform:translateY(36px);transition:opacity 1s var(--ease),transform 1s var(--ease);transition-delay:calc(var(--d,0) * 90ms)}
+.js .reveal.is-visible{opacity:1;transform:none}
+
+/* =====================================================================
+   HEADER
+   ===================================================================== */
+.site-header{position:fixed;inset:0 0 auto;z-index:100;--fg:#fff;color:#fff;border-bottom:1px solid transparent;transition:background-color .4s,border-color .4s}
+.site-header.is-scrolled{background:rgba(0,0,0,.88);-webkit-backdrop-filter:blur(12px);backdrop-filter:blur(12px);border-color:rgba(255,255,255,.12)}
+.site-header.menu-open{background:transparent;border-color:transparent}
+.header-inner{display:flex;align-items:center;justify-content:space-between;gap:24px;height:var(--header-h)}
+.logo{display:inline-flex;align-items:center;gap:12px;line-height:1}
+.logo-mark{font:900 30px/1 var(--en);letter-spacing:-.04em}
+.logo-sub{font:500 9px/1.35 var(--en);letter-spacing:.22em;text-transform:uppercase;padding-left:12px;border-left:1px solid currentColor;opacity:.85}
+.global-nav{display:flex;align-items:center;gap:clamp(20px,3vw,40px)}
+.global-nav ul{display:flex;gap:clamp(18px,2.4vw,34px)}
+.nav-link{position:relative;font:500 12px/1 var(--en);letter-spacing:.2em;padding:8px 0}
+.nav-link::after{content:"";position:absolute;left:0;bottom:0;width:100%;height:1px;background:currentColor;transform:scaleX(0);transform-origin:right;transition:transform .4s var(--ease)}
+.nav-link:hover::after,.nav-link.is-active::after{transform:scaleX(1);transform-origin:left}
+.btn-join{display:inline-flex;align-items:center;gap:10px;min-height:42px;padding:10px 18px;border:1px solid #fff;font:700 12px/1 var(--en);letter-spacing:.18em;background:#fff;color:#000;transition:background-color .3s,color .3s}
+.btn-join:hover{background:#000;color:#fff}
+.burger{display:none;width:48px;height:48px;position:relative;border:1px solid rgba(255,255,255,.4)}
+.burger span{position:absolute;left:13px;width:20px;height:1.5px;background:#fff;transition:transform .4s var(--ease),top .4s var(--ease)}
+.burger span:nth-child(1){top:19px}.burger span:nth-child(2){top:27px}
+.burger[aria-expanded="true"] span:nth-child(1){top:23px;transform:rotate(45deg)}
+.burger[aria-expanded="true"] span:nth-child(2){top:23px;transform:rotate(-45deg)}
+
+.mobile-menu{position:fixed;inset:0;z-index:99;display:flex;flex-direction:column;justify-content:center;gap:40px;padding:calc(var(--header-h) + 24px) var(--gutter) 40px;visibility:hidden;opacity:0;transform:translateY(-16px);transition:opacity .4s var(--ease),transform .4s var(--ease),visibility 0s linear .4s;overflow-y:auto}
+.mobile-menu.is-open{visibility:visible;opacity:1;transform:none;transition:opacity .4s var(--ease),transform .4s var(--ease),visibility 0s}
+.mobile-menu ul{display:grid;gap:4px}
+.mobile-menu a.m-link{display:flex;align-items:baseline;gap:16px;font:900 clamp(34px,10vw,56px)/1.15 var(--en);letter-spacing:-.03em;padding:4px 0}
+.m-link small{font:500 11px/1 var(--en);letter-spacing:.2em;opacity:.6}
+.mobile-menu-foot{font:500 11px/1.6 var(--en);letter-spacing:.24em;opacity:.6}
+
+/* =====================================================================
+   HERO
+   ===================================================================== */
+.hero{position:relative;isolation:isolate;min-height:100vh;min-height:100svh;display:flex;flex-direction:column;justify-content:center;padding:calc(var(--header-h) + 56px) 0 150px;overflow:hidden;overflow:clip}
+.hero-deco{position:absolute;inset:0;z-index:-1;pointer-events:none}
+.hero-grid{position:absolute;inset:0;background-image:linear-gradient(rgba(255,255,255,.05) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.05) 1px,transparent 1px);background-size:96px 96px;-webkit-mask-image:radial-gradient(ellipse at 70% 40%,#000 0%,transparent 70%);mask-image:radial-gradient(ellipse at 70% 40%,#000 0%,transparent 70%)}
+.diag{position:absolute;height:1px;width:160%;left:-30%;background:linear-gradient(90deg,transparent,rgba(255,255,255,.4),transparent);transform:rotate(-16deg)}
+.diag--1{top:26%}.diag--2{top:74%;opacity:.45}.diag--3{top:52%;opacity:.2;transform:rotate(-16deg) translateY(40px)}
+.hero-orb{position:absolute;width:clamp(340px,60vw,860px);aspect-ratio:1;right:-13vw;top:50%;transform:translateY(-52%)}
+.hero-orb .sphere{position:absolute;inset:15%;animation:float 16s ease-in-out infinite}
+.orbit{position:absolute;inset:0;width:100%;height:100%;animation:spin 80s linear infinite}
+.mini{position:absolute;border-radius:50%;background:radial-gradient(circle at 34% 30%,#fff,#cfcfcf 26%,#5c5c5c 66%,#151515);animation:float 11s ease-in-out infinite}
+.mini--1{width:clamp(44px,6vw,92px);aspect-ratio:1;right:9%;top:13%;animation-delay:-3s}
+.mini--2{width:clamp(14px,1.6vw,26px);aspect-ratio:1;left:56%;bottom:16%;animation-delay:-6s}
+.hero-wave{position:absolute;left:0;right:0;bottom:0;width:100%;height:clamp(120px,18vw,240px)}
+.hero-bgword{position:absolute;left:-2vw;bottom:-5vw;font:900 32vw/.8 var(--en);letter-spacing:-.06em;color:transparent;-webkit-text-stroke:1px rgba(255,255,255,.08);white-space:nowrap}
+.hero-content{position:relative;z-index:1}
+.hero-anim{opacity:0;animation:fadeUp 1s var(--ease) forwards;animation-delay:var(--delay,0s)}
+.hero-title{font-family:var(--en);font-weight:900;font-size:clamp(56px,min(12.6vw,17vh),200px);line-height:.86;letter-spacing:-.045em;text-transform:uppercase;margin-top:28px}
+.hero-title .line{display:block;overflow:hidden;padding-bottom:.05em}
+.hero-title .line>span{display:inline-block;transform:translateY(108%);animation:lineUp 1.25s var(--ease) forwards;animation-delay:calc(.15s + var(--i) * .13s)}
+.hero-title .line--2>span{display:inline-flex;align-items:center;gap:.28em}
+.hero-title .thin{font-weight:200;letter-spacing:-.02em}
+.title-rule{display:inline-block;width:clamp(48px,14vw,260px);height:clamp(2px,.25vw,3px);background:#fff;transform:scaleX(0);transform-origin:left;animation:ruleIn 1.1s var(--ease) 1.1s forwards}
+.title-note{font:500 clamp(9px,.85vw,12px)/1.6 var(--en);letter-spacing:.24em;opacity:.7;text-transform:uppercase;max-width:16em}
+.hero-ja{display:block;font-family:var(--jp);font-size:clamp(22px,3.2vw,44px);font-weight:900;letter-spacing:.04em;line-height:1.45;margin-top:clamp(22px,3vw,36px);text-transform:none;font-feature-settings:"palt"}
+.hero-lead{max-width:36em;margin-top:18px;color:rgba(255,255,255,.74);font-size:clamp(14px,1.1vw,16px);line-height:2}
+.hero-cta{display:flex;flex-wrap:wrap;gap:16px;margin-top:clamp(32px,4vw,48px)}
+.hero-foot{position:absolute;left:0;right:0;bottom:clamp(20px,4vh,40px);z-index:1}
+.hero-foot .container{display:flex;justify-content:space-between;align-items:flex-end;gap:24px}
+.scroll-cue{display:inline-flex;flex-direction:column;align-items:center;gap:12px;font:500 11px/1 var(--en);letter-spacing:.3em;padding:6px}
+.scroll-cue .bar{width:1px;height:56px;background:rgba(255,255,255,.25);position:relative;overflow:hidden}
+.scroll-cue .bar::after{content:"";position:absolute;left:0;top:0;width:1px;height:40%;background:#fff;animation:scrollBar 2.2s var(--ease) infinite}
+.hero-depts{display:flex;gap:28px;font:500 11px/1 var(--en);letter-spacing:.22em;opacity:.7}
+.hero-depts li{display:flex;gap:8px}
+.hero-depts b{font-weight:800}
+
+/* ---------- Ticker ---------- */
+.ticker{position:relative;z-index:2;background:linear-gradient(to bottom,#000 50%,var(--light) 50%);overflow:hidden;padding:clamp(28px,4vw,52px) 0}
+.ticker-band{width:110%;margin-left:-5%;background:#fff;color:#000;border-block:1px solid #000;transform:rotate(-2.2deg);overflow:hidden}
+.ticker-track{display:flex;width:max-content;animation:ticker 42s linear infinite}
+.ticker-track span{display:inline-flex;align-items:center;gap:28px;padding:16px 14px;font:900 clamp(20px,2.6vw,36px)/1 var(--en);letter-spacing:-.01em;white-space:nowrap}
+.ticker-track span i{font-style:normal;font-weight:200}
+.ticker-track span::after{content:"";width:14px;height:14px;border-radius:50%;background:radial-gradient(circle at 35% 30%,#fff,#888 40%,#000);border:1px solid #000}
+
+/* =====================================================================
+   ABOUT
+   ===================================================================== */
+.about{background:var(--light)}
+.about-bgword{position:absolute;right:-3vw;top:clamp(40px,6vw,80px);font:900 clamp(120px,24vw,400px)/.8 var(--en);letter-spacing:-.06em;color:transparent;-webkit-text-stroke:1px rgba(0,0,0,.08);pointer-events:none;white-space:nowrap}
+.about-sphere{position:absolute;width:clamp(160px,22vw,320px);aspect-ratio:1;right:-6vw;bottom:14%;animation:float 18s ease-in-out infinite;pointer-events:none}
+.about-grid{display:grid;grid-template-columns:5fr 6fr;gap:clamp(40px,7vw,120px);align-items:center;position:relative;z-index:1}
+.about-text .ja-head{margin-top:clamp(24px,3vw,40px)}
+.about-text .lead{margin-top:24px;max-width:32em}
+.about-text .btn{margin-top:36px}
+.about-visual{position:relative;padding-bottom:18%;padding-left:10%}
+.about-img--main{aspect-ratio:4/5;width:88%;margin-left:auto}
+.about-img--sub{position:absolute;left:0;bottom:0;width:54%;aspect-ratio:4/3;outline:clamp(6px,1vw,12px) solid var(--light)}
+.about-caption{position:absolute;right:0;bottom:4%;font:500 11px/1.6 var(--en);letter-spacing:.2em;text-align:right;color:var(--dark);writing-mode:vertical-rl;transform:translateX(150%)}
+.flow{position:relative;z-index:1;display:grid;grid-template-columns:repeat(5,1fr);gap:0;margin-top:clamp(72px,9vw,128px);border-top:1px solid #000}
+.flow li{padding:22px 20px 0 0;border-right:1px solid var(--line);padding-left:20px}
+.flow li:first-child{padding-left:0}
+.flow li:last-child{border-right:0}
+.flow-no{font:500 11px/1 var(--en);letter-spacing:.2em;color:var(--dark)}
+.flow-en{display:block;font:900 clamp(20px,2.3vw,32px)/1.1 var(--en);letter-spacing:-.02em;margin-top:14px}
+.flow-ja{display:block;font-size:13px;color:var(--dark);margin-top:6px}
+
+/* =====================================================================
+   DEPARTMENTS
+   ===================================================================== */
+.depts{background:#000}
+.depts .display{font-size:clamp(36px,8.4vw,136px)}
+.depts-sphere{position:absolute;width:clamp(180px,26vw,380px);aspect-ratio:1;right:-5vw;top:calc(var(--slant) + 40px);animation:float 15s ease-in-out infinite}
+.depts-sphere::before{content:"";position:absolute;inset:-18%;border-radius:50%;border:1px dashed rgba(255,255,255,.18)}
+.dept-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:clamp(16px,1.6vw,24px);position:relative;z-index:1}
+.dept-card{background:var(--charcoal);border:1px solid var(--line-d);display:flex;flex-direction:column;transition:border-color .4s var(--ease),transform .5s var(--ease)}
+.dept-card:nth-child(even){margin-top:64px}
+.dept-card:hover{border-color:#fff}
+.dept-top{display:flex;justify-content:space-between;align-items:flex-start;padding:22px 22px 18px}
+.dept-no{font:900 clamp(56px,5.4vw,84px)/.8 var(--en);letter-spacing:-.05em;color:transparent;-webkit-text-stroke:1.2px #fff;transition:color .4s var(--ease)}
+.dept-card:hover .dept-no{color:#fff}
+.dept-icon{width:44px;height:44px;display:grid;place-items:center;border:1px solid var(--line-d);border-radius:50%}
+.dept-icon svg{width:24px;height:24px}
+.dept-card .media{aspect-ratio:4/3}
+.dept-card:hover .media img{transform:scale(1.04)}
+.dept-body{padding:22px 22px 26px;display:flex;flex-direction:column;flex:1}
+.dept-key{font:600 10px/1 var(--en);letter-spacing:.24em;opacity:.6}
+.dept-en{font:900 clamp(20px,1.8vw,26px)/1.05 var(--en);letter-spacing:-.01em;margin-top:12px}
+.dept-ja{font-size:clamp(20px,1.7vw,24px);font-weight:900;margin-top:6px;letter-spacing:.06em}
+.dept-desc{font-size:14px;line-height:1.95;color:rgba(255,255,255,.74);margin-top:14px}
+.dept-label{font:600 10px/1 var(--en);letter-spacing:.24em;opacity:.6;margin-top:22px;padding-top:18px;border-top:1px solid var(--line-d)}
+.dept-tasks{display:grid;gap:8px;margin-top:12px}
+.dept-tasks li{position:relative;padding-left:18px;font-size:13px;line-height:1.6}
+.dept-tasks li::before{content:"";position:absolute;left:0;top:.8em;width:9px;height:1px;background:#fff}
+
+/* =====================================================================
+   ACTIVITIES
+   ===================================================================== */
+.activities{background:#fff}
+.project-list{position:relative;z-index:1}
+.project{display:grid;grid-template-columns:repeat(12,1fr);gap:clamp(24px,4vw,64px);align-items:center;padding-block:clamp(40px,5vw,72px);border-top:1px solid var(--line)}
+.project:last-child{border-bottom:1px solid var(--line)}
+.project-media{grid-column:1 / 8;aspect-ratio:16/10}
+.project-body{grid-column:8 / 13}
+.project:nth-child(even) .project-media{grid-column:6 / 13;order:2}
+.project:nth-child(even) .project-body{grid-column:1 / 6;order:1}
+.project:hover .project-media img{transform:scale(1.04)}
+.project-meta{display:flex;align-items:flex-end;justify-content:space-between;gap:16px}
+.project-code{font:900 clamp(64px,8vw,120px)/.78 var(--en);color:transparent;-webkit-text-stroke:1.2px #000;letter-spacing:-.04em}
+.project-title{font-size:clamp(24px,2.5vw,36px);font-weight:900;line-height:1.35;margin-top:clamp(20px,2.4vw,32px);letter-spacing:.02em;font-feature-settings:"palt"}
+.project-sub{font-size:13px;font-weight:700;color:var(--dark);margin-top:6px}
+.project-desc{margin-top:16px;color:var(--dark);line-height:2;font-size:15px}
+.project-links{display:flex;flex-wrap:wrap;gap:14px 28px;margin-top:26px}
+
+/* =====================================================================
+   WORKS
+   ===================================================================== */
+.works{background:var(--light)}
+.works-note{display:flex;gap:14px;align-items:flex-start;padding:16px 20px;border:1px solid #000;background:#fff;font-size:13px;line-height:1.8;margin-bottom:28px;position:relative;z-index:1}
+.works-note b{font:800 11px/1 var(--en);letter-spacing:.2em;background:#000;color:#fff;padding:6px 8px;flex:none;margin-top:2px}
+.works-toolbar{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:16px;margin-bottom:32px;position:relative;z-index:1}
+.filter{display:flex;flex-wrap:wrap;gap:8px}
+.filter-btn{min-height:46px;padding:10px 20px;border:1px solid #000;font:700 13px/1 var(--en);letter-spacing:.18em;background:transparent;color:#000;transition:background-color .3s,color .3s;display:inline-flex;align-items:center;gap:8px}
+.filter-btn sup{font-size:9px;letter-spacing:.05em;opacity:.7;top:-.6em}
+.filter-btn:hover{background:#fff}
+.filter-btn[aria-pressed="true"]{background:#000;color:#fff}
+.works-count{font:500 12px/1 var(--en);letter-spacing:.2em;color:var(--dark)}
+.works-count b{font:900 28px/1 var(--en);letter-spacing:-.02em;color:#000;margin-right:6px}
+.work-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:clamp(16px,2vw,28px);position:relative;z-index:1}
+.work-card{position:relative;background:#fff;border:1px solid var(--line);display:flex;flex-direction:column;transition:box-shadow .5s var(--ease),border-color .4s}
+.work-card:hover{border-color:#000;box-shadow:0 24px 48px -24px rgba(0,0,0,.35)}
+.work-card[hidden]{display:none}
+.work-card.pop{animation:fadeUp .6s var(--ease) both}
+.work-card .media{aspect-ratio:4/3}
+.work-card:hover .media img{transform:scale(1.05)}
+.work-card .media--contain img{padding:8%}
+.work-card:hover .media--contain img{transform:scale(1.03)}
+.badge-sample{position:absolute;top:12px;left:12px;font:800 10px/1 var(--en);letter-spacing:.2em;background:#fff;color:#000;padding:6px 8px;border:1px solid #000;z-index:1}
+.work-cat{position:absolute;bottom:12px;right:12px;font:700 10px/1 var(--en);letter-spacing:.2em;background:#000;color:#fff;padding:6px 8px;z-index:1}
+.work-body{padding:20px 20px 22px;display:flex;flex-direction:column;flex:1}
+.work-meta{font:500 11px/1.4 var(--en);letter-spacing:.14em;color:var(--dark)}
+.work-title{font-size:17px;font-weight:900;line-height:1.5;margin-top:8px}
+.work-open{text-align:left;font-weight:inherit;line-height:inherit}
+.work-open::after{content:"";position:absolute;inset:0;z-index:2}
+.work-open:focus-visible{outline:none}
+.work-card:has(.work-open:focus-visible){outline:2px solid #000;outline-offset:4px}
+.work-desc{font-size:13px;line-height:1.85;color:var(--dark);margin-top:8px}
+.work-more{display:inline-flex;align-items:center;gap:8px;margin-top:auto;padding-top:16px;font:700 11px/1 var(--en);letter-spacing:.2em}
+.work-more svg{transition:transform .35s var(--ease)}
+.work-card:hover .work-more svg{transform:rotate(90deg)}
+
+/* =====================================================================
+   JOIN
+   ===================================================================== */
+.join{background:#000}
+.join-orb{position:absolute;width:clamp(300px,46vw,680px);aspect-ratio:1;left:-14vw;bottom:-12vw;pointer-events:none}
+.join-orb .sphere{position:absolute;inset:12%;animation:float 18s ease-in-out infinite}
+.join-orb .wire{position:absolute;inset:0;width:100%;height:100%;animation:spin 90s linear infinite reverse}
+.join-wave{position:absolute;right:0;top:calc(var(--slant) + 20px);width:min(70vw,900px);height:auto;opacity:.6;pointer-events:none}
+.join-head{display:grid;grid-template-columns:1.1fr 1fr;gap:clamp(32px,6vw,96px);align-items:end;position:relative;z-index:1}
+.join-head .display{font-size:clamp(48px,10vw,168px)}
+.join-head .lead{margin-top:20px}
+.join-cta{display:flex;flex-wrap:wrap;gap:14px;margin-top:32px}
+.role-grid{display:grid;grid-template-columns:repeat(4,1fr);margin-top:clamp(56px,8vw,112px);border-top:1px solid var(--line-d);position:relative;z-index:1}
+.role-link{display:flex;flex-direction:column;gap:10px;padding:26px 22px 30px;border-right:1px solid var(--line-d);border-bottom:1px solid var(--line-d);position:relative;transition:background-color .4s var(--ease),color .4s var(--ease);background:rgba(0,0,0,.4)}
+.role-link:first-child{border-left:1px solid var(--line-d)}
+.role-link:hover{background:#fff;color:#000}
+.role-no{font:500 11px/1 var(--en);letter-spacing:.2em;opacity:.7}
+.role-en{font:900 clamp(18px,1.7vw,24px)/1.1 var(--en)}
+.role-ja{font-weight:900;font-size:17px}
+.role-sum{font-size:13px;opacity:.75;line-height:1.7}
+.role-arrow{position:absolute;right:20px;top:24px;transition:transform .4s var(--ease)}
+.role-link:hover .role-arrow{transform:translate(3px,-3px)}
+.info-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:clamp(16px,1.8vw,24px);margin-top:clamp(24px,3vw,40px);position:relative;z-index:1}
+.info-card{border:1px solid var(--line-d);background:rgba(18,18,18,.92);padding:clamp(22px,2.4vw,32px);display:flex;flex-direction:column;gap:14px}
+.info-card .tag{align-self:flex-start}
+.info-card h3{font-size:clamp(18px,1.6vw,22px);font-weight:900;line-height:1.5}
+.info-card p{font-size:14px;color:rgba(255,255,255,.74);line-height:1.9}
+.info-card .actions{margin-top:auto;display:flex;flex-wrap:wrap;gap:12px;padding-top:8px}
+.info-card .btn{min-height:50px;padding:12px 20px;font-size:14px}
+
+/* =====================================================================
+   FAQ
+   ===================================================================== */
+.faq{background:#fff}
+.faq-layout{display:grid;grid-template-columns:4fr 7fr;gap:clamp(32px,6vw,96px);position:relative;z-index:1}
+.faq-aside{position:sticky;top:calc(var(--header-h) + 32px);align-self:start}
+.faq-aside .lead{margin-top:22px}
+.faq-sphere{width:clamp(90px,10vw,150px);aspect-ratio:1;margin-top:40px;animation:float 14s ease-in-out infinite}
+.faq-item{border-top:1px solid #000}
+.faq-item:last-child{border-bottom:1px solid #000}
+.faq-q{width:100%;display:grid;grid-template-columns:auto 1fr auto;gap:clamp(14px,2vw,24px);align-items:center;text-align:left;padding:clamp(22px,2.4vw,30px) 0;font-weight:700;font-size:clamp(15px,1.35vw,18px);line-height:1.6}
+.faq-num{font:800 12px/1 var(--en);letter-spacing:.12em;min-width:3.4em}
+.faq-icon{width:42px;height:42px;border:1px solid #000;border-radius:50%;position:relative;transition:background-color .3s,color .3s;flex:none}
+.faq-icon::before,.faq-icon::after{content:"";position:absolute;left:50%;top:50%;width:14px;height:1.5px;background:currentColor;transform:translate(-50%,-50%);transition:transform .45s var(--ease)}
+.faq-icon::after{transform:translate(-50%,-50%) rotate(90deg)}
+.faq-q:hover .faq-icon,.faq-item.is-open .faq-icon{background:#000;color:#fff}
+.faq-item.is-open .faq-icon::after{transform:translate(-50%,-50%) rotate(0deg)}
+.faq-panel{display:grid;grid-template-rows:0fr;visibility:hidden;transition:grid-template-rows .5s var(--ease),visibility 0s linear .5s}
+.faq-item.is-open .faq-panel{grid-template-rows:1fr;visibility:visible;transition:grid-template-rows .5s var(--ease),visibility 0s}
+.faq-panel-inner{overflow:hidden;min-height:0}
+.faq-a{padding:0 clamp(0px,5vw,66px) 30px calc(3.4em + clamp(14px,2vw,24px));color:var(--dark);line-height:2;font-size:15px}
+.faq-a a{color:#000;font-weight:700;text-decoration:underline;text-underline-offset:4px;text-decoration-thickness:1px}
+.faq-a a:hover{text-decoration-thickness:2px}
+
+/* =====================================================================
+   CONTACT / FORMS
+   ===================================================================== */
+.contact{background:#000}
+.contact .diag{opacity:.35}
+.demo-banner{display:flex;gap:16px;align-items:center;flex-wrap:wrap;border:1px dashed rgba(255,255,255,.55);padding:16px 20px;font-size:14px;line-height:1.7;margin-bottom:32px;position:relative;z-index:1}
+.demo-chip{display:inline-block;font:900 11px/1 var(--en);letter-spacing:.24em;background:#fff;color:#000;padding:7px 10px;flex:none}
+.tabs{display:grid;grid-template-columns:1fr 1fr;border:1px solid var(--line-d);position:relative;z-index:1}
+.tab{display:flex;flex-direction:column;gap:6px;align-items:flex-start;padding:20px clamp(16px,2.4vw,28px);text-align:left;color:rgba(255,255,255,.7);transition:background-color .35s,color .35s;min-height:72px}
+.tab+.tab{border-left:1px solid var(--line-d)}
+.tab:hover{color:#fff;background:var(--charcoal)}
+.tab[aria-selected="true"]{background:#fff;color:#000}
+.tab-en{font:600 11px/1 var(--en);letter-spacing:.24em}
+.tab-ja{font-weight:900;font-size:clamp(15px,1.4vw,18px);line-height:1.4}
+.tab-panel{display:grid;grid-template-columns:4fr 8fr;gap:clamp(24px,4vw,64px);padding-top:clamp(32px,4vw,56px);position:relative;z-index:1}
+.tab-panel[hidden]{display:none}
+.panel-aside h3{font:900 clamp(28px,3.4vw,48px)/1 var(--en);letter-spacing:-.03em}
+.panel-aside .ja{font-weight:900;font-size:17px;margin-top:14px}
+.panel-aside p.txt{color:rgba(255,255,255,.74);font-size:14px;line-height:1.9;margin-top:14px}
+.panel-aside .btn{margin-top:24px;width:100%;justify-content:space-between}
+.panel-aside ul.check{margin-top:20px;display:grid;gap:10px;font-size:14px}
+.panel-aside ul.check li{display:flex;gap:12px;align-items:center;padding-bottom:10px;border-bottom:1px solid var(--line-d)}
+.panel-aside ul.check li::before{content:"";width:8px;height:8px;background:#fff;flex:none}
+.form{background:var(--charcoal);border:1px solid var(--line-d);padding:clamp(20px,3.6vw,48px)}
+.form-summary{border:2px solid #fff;padding:14px 16px;margin-bottom:24px;font-size:14px;line-height:1.7;display:flex;gap:12px;align-items:flex-start}
+.form-summary[hidden]{display:none}
+.form-summary::before{content:"!";display:grid;place-items:center;width:22px;height:22px;border-radius:50%;background:#fff;color:#000;font:900 13px/1 var(--en);flex:none;margin-top:1px}
+.form-grid{display:grid;grid-template-columns:1fr 1fr;gap:26px 24px}
+.field{display:flex;flex-direction:column;min-width:0}
+.field--full{grid-column:1 / -1}
+.field-label,.fieldset legend{display:flex;align-items:center;flex-wrap:wrap;gap:10px;font-weight:700;font-size:14px;margin-bottom:10px;padding:0}
+.req,.opt{font:700 10px/1 var(--jp);padding:4px 7px;letter-spacing:.05em}
+.req{background:#fff;color:#000;border:1px solid #fff}
+.opt{border:1px solid rgba(255,255,255,.5);color:rgba(255,255,255,.8)}
+.hint{font-size:12px;color:rgba(255,255,255,.62);margin-top:8px;line-height:1.6}
+.input{width:100%;min-height:54px;padding:13px 16px;background:#fff;color:#000;border:1px solid var(--mid);border-radius:0;font-size:16px;line-height:1.5;transition:border-color .25s,box-shadow .25s;-webkit-appearance:none;appearance:none}
+.input::placeholder{color:var(--mid)}
+.input:focus{outline:2px solid #fff;outline-offset:2px;border-color:#000}
+textarea.input{min-height:150px;resize:vertical;line-height:1.75}
+select.input{padding-right:46px;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='14' height='14' viewBox='0 0 24 24' fill='none' stroke='%23000' stroke-width='2'%3E%3Cpath d='M6 9l6 6 6-6'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 16px center;cursor:pointer}
+.field.has-error .input{border:3px solid #000;box-shadow:0 0 0 2px #fff;background-image:repeating-linear-gradient(-45deg,rgba(0,0,0,.04) 0 6px,transparent 6px 12px)}
+.field.has-error select.input{background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='14' height='14' viewBox='0 0 24 24' fill='none' stroke='%23000' stroke-width='2'%3E%3Cpath d='M6 9l6 6 6-6'/%3E%3C/svg%3E")}
+.field-error{display:flex;gap:8px;align-items:flex-start;font-size:13px;font-weight:700;line-height:1.6;margin-top:10px}
+.field-error::before{content:"!";display:grid;place-items:center;width:18px;height:18px;border-radius:50%;background:#fff;color:#000;font:900 11px/1 var(--en);flex:none;margin-top:2px}
+.field-error:empty{display:none}
+.fieldset{border:0;padding:0;margin:0;min-width:0}
+.chips{display:flex;flex-wrap:wrap;gap:10px}
+.chip{position:relative}
+.chip input{position:absolute;opacity:0;width:1px;height:1px;margin:0}
+.chip span{display:inline-flex;align-items:center;gap:10px;min-height:46px;padding:10px 16px;border:1px solid rgba(255,255,255,.4);font-size:14px;line-height:1.4;cursor:pointer;user-select:none;transition:background-color .25s,color .25s,border-color .25s}
+.chip span::before{content:"";width:14px;height:14px;border:1px solid currentColor;flex:none;transition:background-color .2s,box-shadow .2s}
+.chip:hover span{border-color:#fff}
+.chip input:checked+span{background:#fff;color:#000;border-color:#fff}
+.chip input:checked+span::before{background:#000;box-shadow:inset 0 0 0 3px #fff}
+.chip input:focus-visible+span{outline:2px solid #fff;outline-offset:3px}
+.form-foot{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:16px 24px;margin-top:32px;padding-top:24px;border-top:1px solid var(--line-d)}
+.demo-note{font-size:13px;line-height:1.7;color:rgba(255,255,255,.8);display:flex;gap:10px;align-items:flex-start;max-width:30em}
+.demo-note::before{content:"DEMO";font:900 9px/1 var(--en);letter-spacing:.2em;border:1px solid currentColor;padding:4px 6px;flex:none;margin-top:3px}
+.btn--submit{min-width:min(100%,280px);justify-content:space-between}
+
+/* =====================================================================
+   FOOTER
+   ===================================================================== */
+.footer{position:relative;overflow:hidden;padding-top:clamp(72px,9vw,128px);border-top:1px solid var(--line-d)}
+.footer-top{display:grid;grid-template-columns:1.4fr 1fr 1fr auto;gap:40px;position:relative;z-index:1}
+.footer-brand p{font-size:14px;line-height:1.9;margin-top:20px;color:rgba(255,255,255,.8)}
+.footer-brand .en{font:500 11px/1.6 var(--en);letter-spacing:.22em;text-transform:uppercase;color:rgba(255,255,255,.6);margin-top:8px}
+.footer-label{font:600 11px/1 var(--en);letter-spacing:.24em;color:rgba(255,255,255,.55);margin-bottom:18px}
+.footer-list{display:grid;gap:10px}
+.footer-list a{display:inline-flex;align-items:center;gap:8px;font:500 14px/1.6 var(--en);letter-spacing:.06em;transition:opacity .25s}
+.footer-list a:hover{opacity:.6}
+.to-top{width:64px;height:64px;border-radius:50%;border:1px solid #fff;display:grid;place-items:center;transition:background-color .3s,color .3s}
+.to-top:hover{background:#fff;color:#000}
+.footer-giant{font:900 clamp(120px,33vw,520px)/.74 var(--en);letter-spacing:-.06em;text-align:center;color:transparent;-webkit-text-stroke:1px rgba(255,255,255,.22);margin-top:clamp(48px,7vw,96px);user-select:none;white-space:nowrap}
+.footer-bottom{display:flex;flex-wrap:wrap;justify-content:space-between;gap:12px;padding-block:24px 32px;border-top:1px solid var(--line-d);font:500 11px/1.6 var(--en);letter-spacing:.14em;color:rgba(255,255,255,.6);position:relative;z-index:1}
+
+/* =====================================================================
+   MODAL / TOAST
+   ===================================================================== */
+.modal{position:fixed;inset:0;z-index:200;display:grid;place-items:center;padding:16px}
+.modal[hidden]{display:none}
+.modal-backdrop{position:absolute;inset:0;background:rgba(0,0,0,.8);-webkit-backdrop-filter:blur(6px);backdrop-filter:blur(6px);opacity:0;transition:opacity .35s var(--ease)}
+.modal-dialog{position:relative;width:min(100%,640px);max-height:calc(100vh - 32px);max-height:calc(100dvh - 32px);overflow-y:auto;overscroll-behavior:contain;background:#fff;color:#000;--fg:#000;opacity:0;transform:translateY(28px) scale(.98);transition:opacity .4s var(--ease),transform .4s var(--ease)}
+.modal.is-open .modal-backdrop{opacity:1}
+.modal.is-open .modal-dialog{opacity:1;transform:none}
+.modal-close{position:absolute;top:12px;right:12px;width:48px;height:48px;display:grid;place-items:center;background:#000;color:#fff;border:1px solid #000;z-index:3;transition:background-color .3s,color .3s}
+.modal-close:hover{background:#fff;color:#000}
+.modal-close:focus-visible{outline:2px solid #000;outline-offset:3px;box-shadow:0 0 0 2px #fff inset}
+.modal-dialog--work{width:min(100%,980px)}
+.work-modal-media{background:var(--charcoal);aspect-ratio:16/9;max-height:62vh;width:100%}
+.work-modal-media .media{width:100%;height:100%}
+.work-modal-media .media img{object-fit:contain;padding:3%}
+.video-frame{position:relative;width:100%;height:100%}
+.video-frame iframe{position:absolute;inset:0;width:100%;height:100%;border:0}
+.work-modal-body{padding:clamp(24px,4vw,44px)}
+.work-modal-title{font-size:clamp(22px,2.6vw,32px);font-weight:900;line-height:1.45;margin-top:14px}
+.work-modal-desc{margin-top:14px;color:var(--dark);line-height:2}
+.work-modal-meta{display:grid;grid-template-columns:auto 1fr;gap:10px 24px;margin-top:22px;padding-top:20px;border-top:1px solid var(--line);font-size:14px}
+.work-modal-meta dt{font:600 11px/1.9 var(--en);letter-spacing:.2em;color:var(--dark)}
+.work-modal-sample{margin-top:20px;padding:12px 14px;border:1px solid #000;font-size:13px;font-weight:700;line-height:1.7}
+.work-modal-sample:empty{display:none}
+.work-modal-actions{margin-top:24px;display:flex;flex-wrap:wrap;gap:12px;align-items:center}
+.muted{font-size:13px;color:var(--dark)}
+.submit-body{padding:clamp(40px,6vw,64px) clamp(24px,5vw,56px) clamp(32px,5vw,48px);text-align:center;display:flex;flex-direction:column;align-items:center;gap:16px}
+.submit-mark{width:72px;height:72px;border-radius:50%;background:radial-gradient(circle at 34% 30%,#fff,#bbb 24%,#444 62%,#000);display:grid;place-items:center;color:#fff}
+.submit-type{font:700 12px/1.6 var(--jp);letter-spacing:.1em;border:1px solid #000;padding:8px 12px}
+.submit-body h2{font-size:clamp(20px,2.6vw,28px);font-weight:900;line-height:1.5}
+.submit-body p.desc{color:var(--dark);line-height:1.9;font-size:15px;max-width:28em}
+.submit-body .btn{margin-top:8px;min-width:200px}
+.toast{position:fixed;left:50%;bottom:24px;z-index:300;transform:translate(-50%,20px);opacity:0;pointer-events:none;background:#000;color:#fff;border:1px solid #fff;padding:14px 20px;font-size:13px;line-height:1.7;max-width:min(92vw,520px);transition:opacity .35s var(--ease),transform .35s var(--ease);box-shadow:0 12px 40px rgba(0,0,0,.4)}
+.toast.is-show{opacity:1;transform:translate(-50%,0)}
+.noscript{padding:16px;background:#000;color:#fff;text-align:center;font-size:14px}
+
+/* ---------- Contact guide (forms disabled) ---------- */
+.contact-guide{background:var(--charcoal);border:1px solid var(--line-d);padding:clamp(22px,3.6vw,48px);display:flex;flex-direction:column;gap:16px}
+.contact-guide[hidden],.form[hidden],.demo-banner[hidden]{display:none}
+.guide-label{font:600 11px/1 var(--en);letter-spacing:.24em;opacity:.6}
+.guide-title{font-size:clamp(19px,1.9vw,26px);font-weight:900;line-height:1.5}
+.contact-guide p{font-size:15px;line-height:1.95;color:rgba(255,255,255,.8)}
+.contact-guide .guide-note{font-size:13px;color:rgba(255,255,255,.65);padding-top:14px;border-top:1px solid var(--line-d)}
+.guide-actions{display:flex;flex-wrap:wrap;gap:12px;margin-top:6px}
+.guide-actions .btn{min-height:50px;padding:12px 20px;font-size:14px}
+.guide-privacy{display:flex;gap:12px;align-items:flex-start;font-size:13px!important;border:1px dashed rgba(255,255,255,.45);padding:12px 14px}
+.guide-privacy b{font:900 10px/1 var(--en);letter-spacing:.2em;background:#fff;color:#000;padding:5px 7px;flex:none;margin-top:3px}
+
+/* ---------- Site information (copyright / manager / contact / updated) ---------- */
+.site-info{position:relative;z-index:1;margin-top:clamp(48px,6vw,80px);padding-top:32px;border-top:1px solid var(--line-d)}
+.site-info-list{display:grid;grid-template-columns:repeat(4,1fr);gap:24px 32px}
+.site-info-list dt{font:600 11px/1.6 var(--en);letter-spacing:.14em;color:rgba(255,255,255,.55);margin-bottom:8px}
+.site-info-list dd{font-size:14px;line-height:1.8;word-break:break-word}
+.site-info-note{font-size:12px;color:rgba(255,255,255,.6);margin-top:24px;line-height:1.8}
+.todo{border-bottom:1px dashed currentColor}
+
+/* ---------- 公開前チェック（URL末尾に ?check を付けた時のみ） ---------- */
+.check-mode [data-todo],.check-mode .is-unset{outline:2px dashed currentColor;outline-offset:3px}
+.check-mode img[data-placeholder],.check-mode img[data-failed]{outline:3px dashed #000;outline-offset:-8px}
+.check-panel{position:fixed;right:16px;bottom:16px;z-index:400;width:min(calc(100vw - 32px),400px);max-height:65vh;overflow:auto;background:#fff;color:#000;--fg:#000;border:2px solid #000;padding:18px 18px 16px;font-size:13px;line-height:1.7;box-shadow:0 16px 48px rgba(0,0,0,.35)}
+.check-panel h2{font:800 13px/1.4 var(--en);letter-spacing:.12em;margin-bottom:10px;padding-right:56px}
+.check-panel h3{font-size:12px;font-weight:700;margin-top:12px}
+.check-panel ul{list-style:disc;padding-left:1.3em}
+.check-panel .ok{color:var(--dark)}
+.check-close{position:absolute;top:10px;right:10px;border:1px solid #000;padding:4px 10px;font-size:12px}
+.check-close:hover{background:#000;color:#fff}
+
+/* =====================================================================
+   RESPONSIVE
+   ===================================================================== */
+@media (max-width:1199px){
+  .dept-grid{grid-template-columns:repeat(2,1fr)}
+  .dept-card:nth-child(even){margin-top:0}
+  .dept-card:nth-child(2),.dept-card:nth-child(4){transform:translateY(48px)}
+  .dept-grid{padding-bottom:48px}
+  .role-grid{grid-template-columns:repeat(2,1fr)}
+  .role-link:nth-child(3){border-left:1px solid var(--line-d)}
+  .footer-top{grid-template-columns:1fr 1fr;gap:40px 32px}
+  .site-info-list{grid-template-columns:1fr 1fr}
+}
+@media (max-width:960px){
+  :root{--header-h:64px}
+  .global-nav{display:none}
+  .burger{display:block}
+  .sec-head,.about-grid,.join-head,.faq-layout,.tab-panel{grid-template-columns:1fr}
+  .faq-aside{position:static}
+  .faq-sphere{display:none}
+  .about-visual{max-width:620px}
+  .about-caption{display:none}
+  .project,.project:nth-child(even){grid-template-columns:1fr;gap:24px}
+  .project-media,.project-body,.project:nth-child(even) .project-media,.project:nth-child(even) .project-body{grid-column:auto;order:initial}
+  .work-grid{grid-template-columns:repeat(2,1fr)}
+  .info-grid{grid-template-columns:1fr}
+  .hero-depts{display:none}
+  .hero-orb{width:115vw;right:-52vw;top:30%}
+  .flow{grid-template-columns:repeat(3,1fr)}
+  .flow li:nth-child(4){padding-left:0}
+  .flow li:nth-child(3){border-right:0}
+  .flow li:nth-child(n+4){margin-top:28px}
+}
+@media (max-width:640px){
+  body{font-size:15px}
+  .logo-sub{display:none}
+  .btn-join.hide-sm{display:none}
+  .hero{padding-bottom:150px}
+  .mini--2{display:none}
+  .hero-orb{width:130vw;right:-70vw;top:24%;opacity:.55}
+  .mini--1{right:8%;top:12%}
+  .title-note{display:none}
+  .hero-cta .btn{width:100%;justify-content:space-between}
+  .dept-grid{grid-template-columns:1fr;padding-bottom:0}
+  .dept-card:nth-child(2),.dept-card:nth-child(4){transform:none}
+  .work-grid{grid-template-columns:1fr}
+  .role-grid{grid-template-columns:1fr}
+  .role-link{border-left:1px solid var(--line-d)}
+  .form-grid{grid-template-columns:1fr}
+  .btn--submit{width:100%}
+  .tabs{grid-template-columns:1fr}
+  .tab+.tab{border-left:0;border-top:1px solid var(--line-d)}
+  .flow{grid-template-columns:repeat(2,1fr)}
+  .flow li{padding-left:16px!important;border-right:0;border-left:1px solid var(--line)}
+  .flow li:nth-child(n+3){margin-top:24px}
+  .flow li:nth-child(4){margin-top:24px}
+  .about-visual{padding-left:0;padding-bottom:22%}
+  .about-img--main{width:86%}
+  .about-img--sub{width:58%}
+  .faq-a{padding-left:0;padding-right:0}
+  .footer-top{grid-template-columns:1fr}
+  .site-info-list{grid-template-columns:1fr}
+  .join-cta .btn,.about-text .btn{width:100%;justify-content:space-between}
+  .demo-banner{font-size:13px}
+}
+
+/* ---------- Reduced motion ---------- */
+@media (prefers-reduced-motion:reduce){
+  html{scroll-behavior:auto}
+  *,*::before,*::after{animation-duration:.001ms!important;animation-iteration-count:1!important;animation-delay:0s!important;transition-duration:.001ms!important;transition-delay:0s!important}
+  .js .reveal{opacity:1;transform:none}
+  .hero-anim{opacity:1}
+  .hero-title .line>span{transform:none}
+  .title-rule{transform:none}
+}
+</style>
+</head>
+
+<body>
+<a class="skip-link" href="#main">本文へスキップ</a>
+<noscript><p class="noscript">このサイトの一部コンテンツ（4局紹介・活動実績・作品・FAQ）の表示にはJavaScriptが必要です。</p></noscript>
+
+<!-- ================================ HEADER ================================ -->
+<header class="site-header" id="site-header">
+  <div class="container header-inner">
+    <a class="logo" href="#top" aria-label="MCS Media Creative Supporter トップへ">
+      <span class="logo-mark">MCS</span>
+      <span class="logo-sub">Media Creative<br>Supporter</span>
+    </a>
+    <nav class="global-nav" aria-label="メインナビゲーション">
+      <ul>
+        <li><a class="nav-link" href="#about" data-nav-link="about">ABOUT</a></li>
+        <li><a class="nav-link" href="#activities" data-nav-link="activities">ACTIVITIES</a></li>
+        <li><a class="nav-link" href="#works" data-nav-link="works">WORKS</a></li>
+        <li><a class="nav-link" href="#faq" data-nav-link="faq">FAQ</a></li>
+        <li><a class="nav-link" href="#contact" data-nav-link="contact">CONTACT</a></li>
+      </ul>
+      <a class="btn-join" href="#join">JOIN MCS
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M4 12h15M13 6l6 6-6 6"/></svg>
+      </a>
+    </nav>
+    <button class="burger" id="burger" type="button" aria-expanded="false" aria-controls="mobile-menu" aria-label="メニューを開く"><span></span><span></span></button>
+  </div>
+</header>
+
+<div class="mobile-menu is-dark" id="mobile-menu" aria-hidden="true">
+  <nav aria-label="モバイルナビゲーション">
+    <ul>
+      <li><a class="m-link" href="#about"><small>01</small>ABOUT</a></li>
+      <li><a class="m-link" href="#activities"><small>02</small>ACTIVITIES</a></li>
+      <li><a class="m-link" href="#works"><small>03</small>WORKS</a></li>
+      <li><a class="m-link" href="#faq"><small>04</small>FAQ</a></li>
+      <li><a class="m-link" href="#contact"><small>05</small>CONTACT</a></li>
+    </ul>
+  </nav>
+  <a class="btn btn--white m-link-cta" href="#join">JOIN MCS — 団員募集
+    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M4 12h15M13 6l6 6-6 6"/></svg>
+  </a>
+  <p class="mobile-menu-foot">MEDIA CREATIVE SUPPORTER<br>KANSAI UNIVERSITY</p>
+</div>
+
+<main id="main">
+
+<!-- ================================ HERO ================================ -->
+<section id="top" class="hero is-dark" data-nav="top" aria-labelledby="hero-title">
+  <div class="hero-deco" aria-hidden="true">
+    <div class="hero-grid"></div>
+    <span class="diag diag--1"></span><span class="diag diag--2"></span><span class="diag diag--3"></span>
+    <div class="hero-bgword">MCS</div>
+    <div class="hero-orb">
+      <svg class="orbit" viewBox="0 0 400 400" fill="none">
+        <circle cx="200" cy="200" r="198" stroke="rgba(255,255,255,.08)"/>
+        <ellipse cx="200" cy="200" rx="196" ry="70" stroke="rgba(255,255,255,.3)" transform="rotate(-24 200 200)"/>
+        <ellipse cx="200" cy="200" rx="196" ry="124" stroke="rgba(255,255,255,.14)" stroke-dasharray="2 6" transform="rotate(32 200 200)"/>
+        <circle cx="379" cy="120" r="4.5" fill="#fff"/>
+        <circle cx="62" cy="290" r="2.5" fill="rgba(255,255,255,.7)"/>
+      </svg>
+      <div class="sphere"></div>
+    </div>
+    <span class="mini mini--1"></span><span class="mini mini--2"></span>
+    <svg class="hero-wave" viewBox="0 0 1440 240" preserveAspectRatio="none" fill="none">
+      <path d="M0 170 C 240 110, 480 230, 720 160 S 1200 80, 1440 140" stroke="rgba(255,255,255,.28)"/>
+      <path d="M0 184 C 240 124, 480 244, 720 174 S 1200 94, 1440 154" stroke="rgba(255,255,255,.18)"/>
+      <path d="M0 198 C 240 138, 480 258, 720 188 S 1200 108, 1440 168" stroke="rgba(255,255,255,.12)"/>
+      <path d="M0 212 C 240 152, 480 272, 720 202 S 1200 122, 1440 182" stroke="rgba(255,255,255,.07)"/>
+    </svg>
+  </div>
+
+  <div class="container hero-content">
+    <p class="eyebrow hero-anim" style="--delay:.1s">Kansai University ／ Media Creative Supporter</p>
+    <h1 id="hero-title" class="hero-title">
+      <span class="line" style="--i:0"><span>CREATE</span></span>
+      <span class="line line--2" style="--i:1"><span><span class="thin">THE</span><span class="title-rule" aria-hidden="true"></span><span class="title-note" aria-hidden="true">Plan / Shoot / Stream / Edit / Design</span></span></span>
+      <span class="line" style="--i:2"><span>MOMENT.</span></span>
+      <span class="hero-ja hero-anim" style="--delay:.75s">映像で、<br>大学と社会をつなぐ。</span>
+    </h1>
+    <p class="hero-lead hero-anim" style="--delay:.95s">企画・撮影・配信・編集・デザイン。<br>4つの専門局が連携する、関西大学のメディアクリエイトサークル。</p>
+    <div class="hero-cta hero-anim" style="--delay:1.1s">
+      <a class="btn btn--white" href="#join">
+        <span><span class="btn-sub">FOR STUDENTS</span>入団・活動参加はこちら</span>
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M4 12h15M13 6l6 6-6 6"/></svg>
+      </a>
+      <a class="btn btn--ghost" href="#contact" data-open-form="request">
+        <span><span class="btn-sub">FOR CLIENTS</span>制作依頼・お問い合わせ</span>
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M4 12h15M13 6l6 6-6 6"/></svg>
+      </a>
+    </div>
+  </div>
+
+  <div class="hero-foot">
+    <div class="container">
+      <a class="scroll-cue" href="#about" aria-label="下へスクロールしてサークル紹介へ"><span>SCROLL</span><span class="bar" aria-hidden="true"></span></a>
+      <ul class="hero-depts" aria-label="4つの専門局">
+        <li><b>01</b>PRODUCTION</li><li><b>02</b>TECHNICAL</li><li><b>03</b>PUBLIC RELATIONS</li><li><b>04</b>EDITING</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<div class="ticker" aria-hidden="true">
+  <div class="ticker-band">
+    <div class="ticker-track">
+      <span>PLAN <i>企画</i></span><span>SHOOT <i>撮影</i></span><span>STREAM <i>配信</i></span><span>EDIT <i>編集</i></span><span>DESIGN <i>デザイン</i></span><span>PROMOTE <i>広報</i></span>
+      <span>PLAN <i>企画</i></span><span>SHOOT <i>撮影</i></span><span>STREAM <i>配信</i></span><span>EDIT <i>編集</i></span><span>DESIGN <i>デザイン</i></span><span>PROMOTE <i>広報</i></span>
+    </div>
+  </div>
+</div>
+
+<!-- ================================ ABOUT ================================ -->
+<section id="about" class="sec about" data-nav="about" aria-labelledby="about-title">
+  <div class="about-bgword" aria-hidden="true">ABOUT</div>
+  <div class="sphere sphere--light about-sphere" aria-hidden="true"></div>
+  <div class="container about-grid">
+    <div class="about-text reveal">
+      <p class="eyebrow">About MCS</p>
+      <h2 id="about-title" class="display">About<br><span class="outline-text">MCS</span></h2>
+      <p class="ja-head">つくるだけじゃない。<br>届けるところまで。</p>
+      <p class="lead">MCS（Media Creative Supporter）は、関西大学で映像制作・ライブ配信・デザイン・情報発信などに取り組むメディアクリエイトサークルです。企画から撮影、配信、編集、広報まで、4つの専門局が連携し、大学内外のさまざまな活動をメディアの力で支えています。</p>
+      <a class="btn btn--black" href="#departments">4つの専門局を見る
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M4 12h15M13 6l6 6-6 6"/></svg>
+      </a>
+    </div>
+    <div class="about-visual reveal" style="--d:2">
+      <div class="about-img--main" data-media="about_main" data-w="800" data-h="1000"></div>
+      <div class="about-img--sub" data-media="about_sub" data-w="800" data-h="600"></div>
+      <p class="about-caption" aria-hidden="true">MEDIA CREATIVE SUPPORTER</p>
+    </div>
+  </div>
+  <ol class="container flow reveal" aria-label="MCSの制作の流れ">
+    <li><span class="flow-no">01</span><span class="flow-en">PLAN</span><span class="flow-ja">企画</span></li>
+    <li><span class="flow-no">02</span><span class="flow-en">SHOOT</span><span class="flow-ja">撮影</span></li>
+    <li><span class="flow-no">03</span><span class="flow-en">STREAM</span><span class="flow-ja">配信</span></li>
+    <li><span class="flow-no">04</span><span class="flow-en">EDIT</span><span class="flow-ja">編集</span></li>
+    <li><span class="flow-no">05</span><span class="flow-en">PROMOTE</span><span class="flow-ja">広報</span></li>
+  </ol>
+</section>
+
+<!-- ============================= DEPARTMENTS ============================= -->
+<section id="departments" class="sec depts is-dark slant" data-nav="about" aria-labelledby="dept-title">
+  <div class="sphere depts-sphere" aria-hidden="true"></div>
+  <div class="container">
+    <div class="sec-head reveal">
+      <div>
+        <p class="eyebrow">Four Departments</p>
+        <h2 id="dept-title" class="display">Four<br><span class="thin">Depart</span>ments</h2>
+      </div>
+      <div>
+        <p class="ja-head">4つの専門局が、<br>ひとつの作品をつくる。</p>
+        <p class="lead" style="margin-top:18px">制作局・技術局・広報局・編集局。それぞれの専門性を持ち寄り、企画から発信までをチームで形にします。</p>
+      </div>
+    </div>
+    <div class="dept-grid" id="dept-grid"></div>
+  </div>
+</section>
+
+<!-- ============================= ACTIVITIES ============================= -->
+<section id="activities" class="sec activities slant--rev slant" data-nav="activities" aria-labelledby="act-title">
+  <div class="container">
+    <div class="sec-head reveal">
+      <div>
+        <p class="eyebrow">Projects / Activities</p>
+        <h2 id="act-title" class="display">Acti<span class="outline-text">vities</span></h2>
+      </div>
+      <div>
+        <p class="ja-head">活動実績</p>
+        <p class="lead" style="margin-top:18px">スポーツ中継から番組制作、公式依頼の映像、YouTube配信、学習サポート、キャンパスイベントまで。MCSの活動をご紹介します。</p>
+      </div>
+    </div>
+    <div class="project-list" id="project-list"></div>
+  </div>
+</section>
+
+<!-- =============================== WORKS =============================== -->
+<section id="works" class="sec works slant" data-nav="works" aria-labelledby="works-title">
+  <div class="container">
+    <div class="sec-head reveal">
+      <div>
+        <p class="eyebrow">Portfolio / Gallery</p>
+        <h2 id="works-title" class="display">Works</h2>
+      </div>
+      <div>
+        <p class="ja-head">制作物ギャラリー</p>
+        <p class="lead" style="margin-top:18px">映像作品、ポスター・POPなどのデザイン、ライブ配信アーカイブ。カードを選択すると詳細を表示します。</p>
+      </div>
+    </div>
+    <p class="works-note reveal"><b>SAMPLE</b><span>現在掲載している作品はすべてサンプルデータです。実際の制作実績ではありません（作品名・サムネイル・公開URLは差し替え予定）。</span></p>
+    <div class="works-toolbar reveal">
+      <div class="filter" role="group" aria-label="作品カテゴリで絞り込む">
+        <button class="filter-btn" type="button" data-filter="all" aria-pressed="true">ALL<sup data-count="all"></sup></button>
+        <button class="filter-btn" type="button" data-filter="video" aria-pressed="false">VIDEO<sup data-count="video"></sup></button>
+        <button class="filter-btn" type="button" data-filter="design" aria-pressed="false">DESIGN<sup data-count="design"></sup></button>
+        <button class="filter-btn" type="button" data-filter="live" aria-pressed="false">LIVE<sup data-count="live"></sup></button>
+      </div>
+      <p class="works-count" id="works-count" aria-live="polite"></p>
+    </div>
+    <div class="work-grid" id="work-grid"></div>
+  </div>
+</section>
+
+<!-- =============================== JOIN =============================== -->
+<section id="join" class="sec join is-dark slant" data-nav="join" aria-labelledby="join-title">
+  <div class="join-orb" aria-hidden="true">
+    <svg class="wire" viewBox="0 0 200 200" fill="none" stroke="rgba(255,255,255,.28)" stroke-width=".5">
+      <circle cx="100" cy="100" r="98"/>
+      <ellipse cx="100" cy="100" rx="98" ry="32"/><ellipse cx="100" cy="100" rx="98" ry="66"/>
+      <ellipse cx="100" cy="100" rx="32" ry="98"/><ellipse cx="100" cy="100" rx="66" ry="98"/>
+      <line x1="2" y1="100" x2="198" y2="100"/><line x1="100" y1="2" x2="100" y2="198"/>
+    </svg>
+    <div class="sphere"></div>
+  </div>
+  <svg class="join-wave" viewBox="0 0 900 300" fill="none" aria-hidden="true">
+    <path d="M0 220 C 200 60, 420 300, 640 140 S 860 40, 900 60" stroke="rgba(255,255,255,.3)"/>
+    <path d="M0 240 C 200 80, 420 320, 640 160 S 860 60, 900 80" stroke="rgba(255,255,255,.16)"/>
+    <path d="M0 260 C 200 100, 420 340, 640 180 S 860 80, 900 100" stroke="rgba(255,255,255,.08)"/>
+  </svg>
+  <div class="container">
+    <div class="join-head reveal">
+      <div>
+        <p class="eyebrow">Join Us</p>
+        <h2 id="join-title" class="display">Find<br><span class="thin">your</span><br><span class="outline-text">Role.</span></h2>
+      </div>
+      <div>
+        <p class="ja-head">あなたの『つくりたい』が、<br>ここにある。</p>
+        <p class="lead">映像制作、ライブ配信、編集、デザイン、広報。MCSには、さまざまな形でメディアづくりに関われる場所があります。自分の興味に合った活動を見つけてみてください。</p>
+        <div class="join-cta">
+          <a class="btn btn--white" href="#contact" data-open-form="join">入団・お問い合わせ方法
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M4 12h15M13 6l6 6-6 6"/></svg>
+          </a>
+          <a class="btn btn--ghost" data-link="LINE_URL" data-link-label="LINE公式アカウント">LINEで入団・お問い合わせ
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M7 17L17 7M9 7h8v8"/></svg>
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <nav class="role-grid reveal" id="role-grid" aria-label="4局の紹介へ移動"></nav>
+
+    <div class="info-grid">
+      <article class="info-card reveal" style="--d:0">
+        <span class="tag">Entry</span>
+        <h3>入団・活動参加のご案内</h3>
+        <p>入団・活動参加に関する最新情報は、公式SNS・LINE公式アカウントをご確認ください。</p>
+        <div class="actions"><a class="btn btn--white" href="#contact" data-open-form="join">お問い合わせ方法</a></div>
+      </article>
+      <article class="info-card reveal" style="--d:1">
+        <span class="tag">LINE</span>
+        <h3>LINE公式アカウント</h3>
+        <p>入団・活動参加についてのお問い合わせは、LINE公式アカウントからも受け付けています。</p>
+        <div class="actions"><a class="btn btn--ghost" data-link="LINE_URL" data-link-label="LINE公式アカウント">LINEを開く
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M7 17L17 7M9 7h8v8"/></svg></a></div>
+      </article>
+      <article class="info-card reveal" style="--d:2">
+        <span class="tag">Information</span>
+        <h3>新歓説明会・見学会</h3>
+        <p>開催情報は公式SNSをご確認ください。</p>
+        <div class="actions">
+          <a class="btn btn--ghost" data-link="X_URL" data-link-label="X公式アカウント">X</a>
+          <a class="btn btn--ghost" data-link="INSTAGRAM_URL" data-link-label="Instagram公式アカウント">Instagram</a>
+        </div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- ================================ FAQ ================================ -->
+<section id="faq" class="sec faq slant--rev slant" data-nav="faq" aria-labelledby="faq-title">
+  <div class="container faq-layout">
+    <div class="faq-aside reveal">
+      <p class="eyebrow">Q &amp; A</p>
+      <h2 id="faq-title" class="display">FAQ</h2>
+      <p class="ja-head" style="margin-top:24px">よくある質問</p>
+      <p class="lead">最新の募集情報・活動条件は公式SNSをご確認ください。</p>
+      <div class="sphere sphere--light faq-sphere" aria-hidden="true"></div>
+    </div>
+    <div class="faq-list reveal" id="faq-list" style="--d:1"></div>
+  </div>
+</section>
+
+<!-- ============================== CONTACT ============================== -->
+<section id="contact" class="sec contact is-dark slant" data-nav="contact" aria-labelledby="contact-title">
+  <span class="diag diag--1" aria-hidden="true" style="top:30%"></span>
+  <div class="container">
+    <div class="sec-head reveal">
+      <div>
+        <p class="eyebrow">Contact</p>
+        <h2 id="contact-title" class="display">Con<span class="thin">tact</span></h2>
+      </div>
+      <div>
+        <p class="ja-head">お問い合わせ</p>
+        <p class="lead" style="margin-top:18px">入団・活動参加を希望する学生の方、映像制作やライブ配信のご相談をお考えの企業・大学・地域団体の方は、それぞれのお問い合わせ方法をご確認ください。</p>
+      </div>
+    </div>
+
+    <!-- demoForms: true の時のみ表示 -->
+    <p class="demo-banner" id="demo-banner" hidden><span class="demo-chip">DEMO</span><span>団体内確認用のデモフォームです。送信ボタンを押しても、入力内容は実際には送信・保存されません。実在の個人情報は入力しないでください。</span></p>
+
+    <div class="tabs reveal" role="tablist" aria-label="お問い合わせフォームの種類">
+      <button class="tab" type="button" role="tab" id="tab-join" data-tab="join" aria-selected="true" aria-controls="panel-join">
+        <span class="tab-en">FOR STUDENTS</span><span class="tab-ja">入団希望・活動参加</span>
+      </button>
+      <button class="tab" type="button" role="tab" id="tab-request" data-tab="request" aria-selected="false" aria-controls="panel-request" tabindex="-1">
+        <span class="tab-en">FOR CLIENTS</span><span class="tab-ja">制作依頼（企業・大学・外部の方）</span>
+      </button>
+    </div>
+
+    <!-- ---------- JOIN FORM ---------- -->
+    <div class="tab-panel" id="panel-join" role="tabpanel" aria-labelledby="tab-join" data-panel="join" tabindex="0">
+      <div class="panel-aside">
+        <h3>JOIN</h3>
+        <p class="ja">団員募集・入団・活動参加</p>
+        <p class="txt">興味のある局や活動が見つかったら、LINE公式アカウントや公式SNSをチェックしてみてください。</p>
+        <a class="btn btn--white" data-link="LINE_URL" data-link-label="LINE公式アカウント">
+          <span><span class="btn-sub">LINE OFFICIAL</span>LINEで入団・お問い合わせ</span>
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M7 17L17 7M9 7h8v8"/></svg>
+        </a>
+      </div>
+      <div class="contact-guide" data-guide>
+        <p class="guide-label">HOW TO CONTACT</p>
+        <h4 class="guide-title">入団・活動参加のお問い合わせ方法</h4>
+        <p>入団・活動参加に関するお問い合わせは、LINE公式アカウントや公式SNSをご確認ください。</p>
+        <div class="guide-actions">
+          <a class="btn btn--ghost" data-link="X_URL" data-link-label="X公式アカウント">X <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M7 17L17 7M9 7h8v8"/></svg></a>
+          <a class="btn btn--ghost" data-link="INSTAGRAM_URL" data-link-label="Instagram公式アカウント">Instagram <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M7 17L17 7M9 7h8v8"/></svg></a>
+        </div>
+        <p class="guide-privacy"><b>INFO</b><span>このホームページでは個人情報を取り扱わないため、入力フォームによる受付は行っていません。</span></p>
+        <p class="guide-note">新歓説明会・見学会の開催情報は公式SNSをご確認ください。</p>
+      </div>
+      <!-- デモフォーム（features.demoForms が true の時のみ表示。送信・保存は一切行いません） -->
+      <form class="form" id="form-join" data-form-type="join" novalidate aria-describedby="join-demo-note" hidden>
+        <div class="form-summary" role="alert" hidden></div>
+        <div class="form-grid">
+          <div class="field">
+            <label class="field-label" for="join-name">名前 <span class="req">必須</span></label>
+            <input class="input" id="join-name" name="name" type="text" autocomplete="name" required data-validate data-label="名前" aria-describedby="join-name-error">
+            <p class="field-error" id="join-name-error"></p>
+          </div>
+          <div class="field">
+            <label class="field-label" for="join-email">メールアドレス <span class="req">必須</span></label>
+            <input class="input" id="join-email" name="email" type="email" inputmode="email" autocomplete="email" required data-validate data-label="メールアドレス" aria-describedby="join-email-hint join-email-error">
+            <p class="hint" id="join-email-hint">例：name@example.com</p>
+            <p class="field-error" id="join-email-error"></p>
+          </div>
+          <div class="field">
+            <label class="field-label" for="join-grade">学年 <span class="opt">任意</span></label>
+            <select class="input" id="join-grade" name="grade">
+              <option value="">選択してください</option>
+              <option>1年生</option><option>2年生</option><option>3年生</option><option>4年生</option><option>大学院生</option><option>その他</option>
+            </select>
+          </div>
+          <fieldset class="fieldset field field--full">
+            <legend>興味のある局 <span class="opt">任意・複数選択可</span></legend>
+            <div class="chips">
+              <label class="chip"><input type="checkbox" name="dept" value="制作局"><span>制作局</span></label>
+              <label class="chip"><input type="checkbox" name="dept" value="技術局"><span>技術局</span></label>
+              <label class="chip"><input type="checkbox" name="dept" value="広報局"><span>広報局</span></label>
+              <label class="chip"><input type="checkbox" name="dept" value="編集局"><span>編集局</span></label>
+              <label class="chip"><input type="checkbox" name="dept" value="未定"><span>まだ決まっていない</span></label>
+            </div>
+          </fieldset>
+          <fieldset class="fieldset field field--full">
+            <legend>興味のある活動 <span class="opt">任意・複数選択可</span></legend>
+            <div class="chips">
+              <label class="chip"><input type="checkbox" name="activity" value="映像の企画・撮影"><span>映像の企画・撮影</span></label>
+              <label class="chip"><input type="checkbox" name="activity" value="ライブ配信"><span>ライブ配信</span></label>
+              <label class="chip"><input type="checkbox" name="activity" value="動画編集・CG"><span>動画編集・CG</span></label>
+              <label class="chip"><input type="checkbox" name="activity" value="デザイン・SNS広報"><span>デザイン・SNS広報</span></label>
+              <label class="chip"><input type="checkbox" name="activity" value="学内イベント"><span>学内イベント</span></label>
+              <label class="chip"><input type="checkbox" name="activity" value="その他"><span>その他</span></label>
+            </div>
+          </fieldset>
+          <div class="field field--full">
+            <label class="field-label" for="join-message">メッセージ <span class="opt">任意</span></label>
+            <textarea class="input" id="join-message" name="message" rows="5"></textarea>
+          </div>
+        </div>
+        <div class="form-foot">
+          <p class="demo-note" id="join-demo-note">デモフォームのため実際の送信は行われません。入力内容は送信・保存されません。</p>
+          <button class="btn btn--white btn--submit" type="submit">送信する（デモ）
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M4 12h15M13 6l6 6-6 6"/></svg>
+          </button>
+        </div>
+      </form>
+    </div>
+
+    <!-- ---------- REQUEST FORM ---------- -->
+    <div class="tab-panel" id="panel-request" role="tabpanel" aria-labelledby="tab-request" data-panel="request" tabindex="0" hidden>
+      <div class="panel-aside">
+        <h3>REQUEST</h3>
+        <p class="ja">企業・大学・外部向け 制作依頼フォーム</p>
+        <p class="txt">映像制作やライブ配信などのご相談については、こちらをご確認ください。対応可否や条件は、ご依頼内容に応じてご相談ください。</p>
+        <ul class="check" aria-label="ご相談いただける内容">
+          <li>映像制作</li><li>ライブ配信</li><li>デザイン制作</li><li>取材・番組制作</li>
+        </ul>
+      </div>
+      <div class="contact-guide" data-guide>
+        <p class="guide-label">HOW TO CONTACT</p>
+        <h4 class="guide-title">制作依頼・取材のご相談方法</h4>
+        <p>映像制作・ライブ配信・デザイン制作・取材や番組制作のご相談は、ページ下部「サイト情報」に記載の連絡先までお問い合わせください。</p>
+        <div class="guide-actions">
+          <a class="btn btn--white" href="#site-info">連絡先を確認する <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M12 5v14M6 13l6 6 6-6"/></svg></a>
+        </div>
+        <p class="guide-privacy"><b>INFO</b><span>このホームページでは個人情報を取り扱わないため、入力フォームによる受付は行っていません。</span></p>
+      </div>
+      <!-- デモフォーム（features.demoForms が true の時のみ表示。送信・保存は一切行いません） -->
+      <form class="form" id="form-request" data-form-type="request" novalidate aria-describedby="request-demo-note" hidden>
+        <div class="form-summary" role="alert" hidden></div>
+        <div class="form-grid">
+          <div class="field">
+            <label class="field-label" for="req-org">団体名・企業名 <span class="opt">任意</span></label>
+            <input class="input" id="req-org" name="organization" type="text" autocomplete="organization">
+          </div>
+          <div class="field">
+            <label class="field-label" for="req-name">担当者名 <span class="req">必須</span></label>
+            <input class="input" id="req-name" name="name" type="text" autocomplete="name" required data-validate data-label="担当者名" aria-describedby="req-name-error">
+            <p class="field-error" id="req-name-error"></p>
+          </div>
+          <div class="field">
+            <label class="field-label" for="req-email">メールアドレス <span class="req">必須</span></label>
+            <input class="input" id="req-email" name="email" type="email" inputmode="email" autocomplete="email" required data-validate data-label="メールアドレス" aria-describedby="req-email-hint req-email-error">
+            <p class="hint" id="req-email-hint">例：name@example.com</p>
+            <p class="field-error" id="req-email-error"></p>
+          </div>
+          <div class="field">
+            <label class="field-label" for="req-type">依頼種別 <span class="opt">任意</span></label>
+            <select class="input" id="req-type" name="type">
+              <option value="">選択してください</option>
+              <option>映像制作</option><option>ライブ配信</option><option>デザイン制作</option><option>取材・番組制作</option><option>その他</option>
+            </select>
+          </div>
+          <div class="field field--full">
+            <label class="field-label" for="req-detail">依頼内容 <span class="req">必須</span></label>
+            <textarea class="input" id="req-detail" name="detail" rows="5" required data-validate data-label="依頼内容" aria-describedby="req-detail-hint req-detail-error"></textarea>
+            <p class="hint" id="req-detail-hint">目的・内容・実施場所・想定する公開先などをご記入ください。</p>
+            <p class="field-error" id="req-detail-error"></p>
+          </div>
+          <div class="field">
+            <label class="field-label" for="req-deadline">希望納期 <span class="opt">任意</span></label>
+            <input class="input" id="req-deadline" name="deadline" type="text" aria-describedby="req-deadline-hint">
+            <p class="hint" id="req-deadline-hint">例：○月中旬、イベント当日 など</p>
+          </div>
+          <div class="field">
+            <label class="field-label" for="req-budget">予算・規模感 <span class="opt">任意</span></label>
+            <input class="input" id="req-budget" name="budget" type="text" aria-describedby="req-budget-hint">
+            <p class="hint" id="req-budget-hint">例：映像1本・3分程度、配信1日 など</p>
+          </div>
+          <div class="field field--full">
+            <label class="field-label" for="req-note">その他の補足 <span class="opt">任意</span></label>
+            <textarea class="input" id="req-note" name="note" rows="4"></textarea>
+          </div>
+        </div>
+        <div class="form-foot">
+          <p class="demo-note" id="request-demo-note">デモフォームのため実際の送信は行われません。入力内容は送信・保存されません。</p>
+          <button class="btn btn--white btn--submit" type="submit">送信する（デモ）
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M4 12h15M13 6l6 6-6 6"/></svg>
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+</section>
+</main>
+
+<!-- ================================ FOOTER ================================ -->
+<footer class="footer is-dark">
+  <div class="container footer-top">
+    <div class="footer-brand">
+      <a class="logo" href="#top" aria-label="MCS トップへ"><span class="logo-mark">MCS</span><span class="logo-sub" style="display:inline">Media Creative<br>Supporter</span></a>
+      <p>関西大学 メディアクリエイトサークル MCS<br>関西大学の学生サークルです。</p>
+      <p class="en">Media Creative Supporter — Kansai University</p>
+    </div>
+    <nav aria-label="フッターナビゲーション">
+      <p class="footer-label">SITEMAP</p>
+      <ul class="footer-list">
+        <li><a href="#about">About</a></li>
+        <li><a href="#departments">Departments</a></li>
+        <li><a href="#activities">Activities</a></li>
+        <li><a href="#works">Works</a></li>
+        <li><a href="#join">Join Us</a></li>
+        <li><a href="#faq">FAQ</a></li>
+        <li><a href="#contact">Contact</a></li>
+      </ul>
+    </nav>
+    <div>
+      <p class="footer-label">FOLLOW</p>
+      <ul class="footer-list">
+        <li><a data-link="X_URL" data-link-label="X公式アカウント">X（公式）<svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M7 17L17 7M9 7h8v8"/></svg></a></li>
+        <li><a data-link="INSTAGRAM_URL" data-link-label="Instagram公式アカウント">Instagram（公式）<svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M7 17L17 7M9 7h8v8"/></svg></a></li>
+        <li><a data-link="MCSTUBE_URL" data-link-label="YouTube「MCSTube」">YouTube「MCSTube」<svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M7 17L17 7M9 7h8v8"/></svg></a></li>
+      </ul>
+    </div>
+    <div>
+      <a class="to-top" href="#top" aria-label="ページの先頭へ戻る">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M12 20V5M6 11l6-6 6 6"/></svg>
+      </a>
+    </div>
+  </div>
+
+  <!-- ★★★ 公開前に必ず編集：サイト情報（著作権・管理責任者・連絡先・最終更新日） ★★★
+       ・「【要確認：…】」を正式な情報に書き換え、書き換えた span の class="todo" と data-todo を削除してください。
+       ・連絡先には個人の私用アドレス等ではなく、団体として公開できる連絡先を記載してください。
+       ・最終更新日は自動では変わりません。サイトを更新したら、その日付に手動で書き換えてください。 -->
+  <section class="container site-info" id="site-info" aria-labelledby="site-info-title">
+    <h2 class="footer-label" id="site-info-title">SITE INFORMATION ／ サイト情報</h2>
+    <dl class="site-info-list">
+      <div>
+        <dt>著作権表示 / COPYRIGHT</dt>
+        <dd>Copyright © <span class="todo" data-todo>【要確認：公開年】</span><br><span class="todo" data-todo>【要確認：著作権者の正式表記】</span></dd>
+      </div>
+      <div>
+        <dt>管理責任者 / SITE MANAGER</dt>
+        <dd><span class="todo" data-todo>【要確認：ホームページ管理責任者】</span></dd>
+      </div>
+      <div>
+        <dt>連絡先 / CONTACT</dt>
+        <dd><span class="todo" data-todo>【要確認：ホームページに関する問い合わせ先】</span></dd>
+      </div>
+      <div>
+        <dt>最終更新日 / LAST UPDATED</dt>
+        <dd><span class="todo" data-todo>【要確認：YYYY年MM月DD日】</span></dd>
+      </div>
+    </dl>
+    <p class="site-info-note">本サイトに掲載している文章・画像・映像などの無断転載・複製を禁じます。</p>
+  </section>
+
+  <div class="footer-giant" aria-hidden="true">MCS</div>
+  <div class="container footer-bottom">
+    <small>MCS — Media Creative Supporter</small>
+    <small>関西大学 メディアクリエイトサークル</small>
+  </div>
+</footer>
+
+<!-- ================================ MODALS ================================ -->
+<div class="modal" id="work-modal" hidden>
+  <div class="modal-backdrop" data-modal-close></div>
+  <div class="modal-dialog modal-dialog--work" role="dialog" aria-modal="true" aria-labelledby="work-modal-title">
+    <button class="modal-close" type="button" data-modal-close aria-label="閉じる">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M5 5l14 14M19 5L5 19"/></svg>
+    </button>
+    <div class="work-modal-media" id="work-modal-media"></div>
+    <div class="work-modal-body">
+      <p class="eyebrow" id="work-modal-cat"></p>
+      <h2 class="work-modal-title" id="work-modal-title"></h2>
+      <p class="work-modal-desc" id="work-modal-desc"></p>
+      <dl class="work-modal-meta" id="work-modal-meta"></dl>
+      <p class="work-modal-sample" id="work-modal-sample"></p>
+      <div class="work-modal-actions" id="work-modal-actions"></div>
+    </div>
+  </div>
+</div>
+
+<div class="modal" id="submit-modal" hidden>
+  <div class="modal-backdrop" data-modal-close></div>
+  <div class="modal-dialog" role="dialog" aria-modal="true" aria-labelledby="submit-modal-title" aria-describedby="submit-modal-desc">
+    <button class="modal-close" type="button" data-modal-close aria-label="閉じる">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M5 5l14 14M19 5L5 19"/></svg>
+    </button>
+    <div class="submit-body">
+      <span class="submit-mark" aria-hidden="true"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg></span>
+      <p class="submit-type" id="submit-modal-type"></p>
+      <h2 id="submit-modal-title">お問い合わせありがとうございます。</h2>
+      <p class="desc" id="submit-modal-desc">これはデモフォームです。入力内容は実際には送信・保存されていません。</p>
+      <button class="btn btn--black" type="button" data-modal-close data-autofocus>閉じる</button>
+    </div>
+  </div>
+</div>
+
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+<script>
+(function () {
+  "use strict";
+
+  const C = window.MCS_CONFIG || {};
+  const $ = (s, r = document) => r.querySelector(s);
+  const $$ = (s, r = document) => Array.from(r.querySelectorAll(s));
+  const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
+  const esc = (s) => String(s == null ? "" : s).replace(/[&<>"']/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]));
+  const isUrl = (u) => typeof u === "string" && /^https?:\/\/\S+$/i.test(u.trim());
+  const hasSrc = (s) => typeof s === "string" && s.trim() !== "";
+  const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+  /* ---------- Icons (monochrome line icons) ---------- */
+  const ICON = {
+    arrow: '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M4 12h15M13 6l6 6-6 6"/></svg>',
+    external: '<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M7 17L17 7M9 7h8v8"/></svg>',
+    plus: '<svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M12 4v16M4 12h16"/></svg>',
+    clapper: '<svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M6 19h36v21H6z"/><path d="M6 19l2.5-9 33-.5L39 19"/><path d="M16 10l-3 9M25 10l-3 9M34 10l-3 9"/></svg>',
+    camera: '<svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><rect x="5" y="14" width="27" height="21" rx="2"/><path d="M32 21l10-6v19l-10-6z"/><circle cx="13" cy="21" r="3"/></svg>',
+    megaphone: '<svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M8 20v9h6l15 8V12l-15 8z"/><path d="M35 19c2.5 2.5 2.5 8.5 0 11M39 15c5 5 5 14 0 19"/><path d="M14 29l3 9h5l-3-8"/></svg>',
+    timeline: '<svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><rect x="5" y="8" width="38" height="32" rx="2"/><path d="M5 30h38M15 30v10M27 30v10M36 30v10"/><path d="M20 14v11l9-5.5z"/></svg>'
+  };
+
+  /* ---------- Colorful image placeholder (SVG data URI) ----------
+     実写真が未提供のため、写真の位置にカラーの抽象画像を表示します（IMAGE PLACEHOLDER表記入り）。
+     UIはモノクロのまま、画像枠だけがカラーになるという本番の見え方を確認できます。 */
+  const PALETTES = [
+    ["#ff5f6d", "#ffc371", "#2b5876", "#fff3b0"],
+    ["#00c9ff", "#92fe9d", "#3a1c71", "#ffaf7b"],
+    ["#fc466b", "#3f5efb", "#ffd200", "#00f2fe"],
+    ["#f7971e", "#ffd200", "#e94057", "#8a2387"],
+    ["#11998e", "#38ef7d", "#0575e6", "#f9d423"],
+    ["#ee0979", "#ff6a00", "#6a3093", "#a8edea"],
+    ["#4facfe", "#00f2fe", "#f093fb", "#f5576c"],
+    ["#43e97b", "#38f9d7", "#fa709a", "#fee140"]
+  ];
+  function placeholder(tone, label, w, h) {
+    w = w || 800; h = h || 600;
+    const p = PALETTES[Math.abs(tone || 0) % PALETTES.length];
+    const m = Math.min(w, h);
+    const r = Math.round;
+    const text = "IMAGE PLACEHOLDER" + (label ? " / " + String(label).replace(/[^\w &\-.]/g, "") : "");
+    const svg =
+      '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 ' + w + " " + h + '" preserveAspectRatio="xMidYMid slice">' +
+      '<defs><linearGradient id="g" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="' + p[0] + '"/><stop offset="1" stop-color="' + p[1] + '"/></linearGradient>' +
+      '<filter id="b" x="-50%" y="-50%" width="200%" height="200%"><feGaussianBlur stdDeviation="' + r(m * 0.12) + '"/></filter></defs>' +
+      '<rect width="' + w + '" height="' + h + '" fill="url(#g)"/>' +
+      '<g filter="url(#b)"><circle cx="' + r(w * 0.72) + '" cy="' + r(h * 0.3) + '" r="' + r(m * 0.34) + '" fill="' + p[2] + '"/>' +
+      '<circle cx="' + r(w * 0.2) + '" cy="' + r(h * 0.8) + '" r="' + r(m * 0.3) + '" fill="' + p[3] + '"/>' +
+      '<ellipse cx="' + r(w * 0.48) + '" cy="' + r(h * 0.55) + '" rx="' + r(w * 0.18) + '" ry="' + r(h * 0.12) + '" fill="#ffffff" opacity=".5"/></g>' +
+      '<text x="' + r(w * 0.05) + '" y="' + r(h * 0.93) + '" font-family="Arial, Helvetica, sans-serif" font-weight="700" font-size="' + r(m * 0.034) + '" letter-spacing="3" fill="#ffffff" fill-opacity=".95">' + text + "</text></svg>";
+    return "data:image/svg+xml;charset=utf-8," + encodeURIComponent(svg);
+  }
+
+  /** 画像HTML：src未設定なら仮画像、読み込み失敗時も仮画像にフォールバック */
+  function mediaHTML(src, opt) {
+    opt = opt || {};
+    const real = hasSrc(src);
+    const ph = placeholder(opt.tone, opt.label, opt.w, opt.h);
+    const alt = real ? opt.alt || "" : "画像準備中：" + (opt.alt || "");
+    return (
+      '<div class="media media--' + (opt.fit === "contain" ? "contain" : "cover") + '">' +
+      '<img src="' + esc(real ? src : ph) + '" alt="' + esc(alt) + '" loading="lazy" decoding="async" data-fallback="' + esc(ph) + '"' +
+      (real ? ' data-original="' + esc(src) + '"' : ' data-placeholder="true"') + '>' +
+      (opt.extra || "") + "</div>"
+    );
+  }
+  document.addEventListener("error", function (e) {
+    const img = e.target;
+    if (!(img instanceof HTMLImageElement) || img.dataset.failed) return;
+    img.dataset.failed = "1";
+    console.warn("[MCS] 画像を読み込めませんでした:", img.dataset.original || img.getAttribute("src"));
+    if (typeof updateCheckPanel === "function") setTimeout(updateCheckPanel, 0);
+    if (img.dataset.fallback) {
+      img.src = img.dataset.fallback;
+      img.alt = "画像を読み込めませんでした（仮画像を表示中）";
+    }
+  }, true);
+
+  /* =============================== RENDER =============================== */
+  function renderAboutMedia() {
+    $$("[data-media]").forEach(function (el) {
+      const cfg = (C.images || {})[el.dataset.media] || {};
+      el.innerHTML = mediaHTML(cfg.src, { alt: cfg.alt, tone: cfg.tone, label: "MCS", w: +el.dataset.w, h: +el.dataset.h });
+      el.firstElementChild.style.height = "100%";
+    });
+  }
+
+  function renderDepartments() {
+    const grid = $("#dept-grid");
+    if (!grid) return;
+    grid.innerHTML = (C.departments || []).map(function (d, i) {
+      return (
+        '<article class="dept-card reveal" id="dept-' + esc(d.id) + '" style="--d:' + i + '" aria-labelledby="dept-' + esc(d.id) + '-title">' +
+          '<div class="dept-top"><span class="dept-no" aria-hidden="true">' + esc(d.no) + '</span><span class="dept-icon">' + (ICON[d.icon] || "") + "</span></div>" +
+          mediaHTML(d.image, { alt: d.imageAlt, tone: d.tone, label: d.en, w: 800, h: 600 }) +
+          '<div class="dept-body">' +
+            '<p class="dept-key">' + esc(d.no) + " — " + esc(d.keyword) + "</p>" +
+            '<p class="dept-en" lang="en">' + esc(d.en) + "</p>" +
+            '<h3 class="dept-ja" id="dept-' + esc(d.id) + '-title">' + esc(d.ja) + "</h3>" +
+            '<p class="dept-desc">' + esc(d.desc) + "</p>" +
+            '<p class="dept-label">ROLE &amp; TASKS</p>' +
+            '<ul class="dept-tasks">' + d.tasks.map(function (t) { return "<li>" + esc(t) + "</li>"; }).join("") + "</ul>" +
+          "</div>" +
+        "</article>"
+      );
+    }).join("");
+  }
+
+  function renderRoles() {
+    const nav = $("#role-grid");
+    if (!nav) return;
+    nav.innerHTML = (C.departments || []).map(function (d) {
+      return (
+        '<a class="role-link" href="#dept-' + esc(d.id) + '">' +
+          '<span class="role-no">' + esc(d.no) + "</span>" +
+          '<span class="role-en" lang="en">' + esc(d.en) + "</span>" +
+          '<span class="role-ja">' + esc(d.ja) + "</span>" +
+          '<span class="role-sum">' + esc(d.tasks.slice(0, 2).join("／")) + "</span>" +
+          '<span class="role-arrow" aria-hidden="true">' + ICON.external + "</span>" +
+        "</a>"
+      );
+    }).join("");
+  }
+
+  function renderActivities() {
+    const list = $("#project-list");
+    if (!list) return;
+    list.innerHTML = (C.activities || []).map(function (a) {
+      let links = '<a class="text-link" href="#works" data-filter-jump="' + esc(a.relatedFilter || "all") + '">関連する作品を見る ' + ICON.arrow + "</a>";
+      if (a.linkKey) links += '<a class="text-link" data-link="' + esc(a.linkKey) + '" data-link-label="' + esc(a.title) + '">YouTubeで見る ' + ICON.external + "</a>";
+      return (
+        '<article class="project reveal" id="project-' + esc(a.key) + '" aria-labelledby="project-' + esc(a.key) + '-title">' +
+          '<div class="project-media">' + mediaHTML(a.image, { alt: a.imageAlt, tone: a.tone, label: a.category, w: 1000, h: 625 }).replace('class="media', 'style="height:100%" class="media') + "</div>" +
+          '<div class="project-body">' +
+            '<div class="project-meta"><span class="project-code" aria-hidden="true">' + esc(a.code) + '</span><span class="tag" lang="en">' + esc(a.category) + "</span></div>" +
+            '<h3 class="project-title" id="project-' + esc(a.key) + '-title">' + esc(a.title) + "</h3>" +
+            (a.sub ? '<p class="project-sub">' + esc(a.sub) + "</p>" : "") +
+            '<p class="project-desc">' + esc(a.desc) + "</p>" +
+            '<div class="project-links">' + links + "</div>" +
+          "</div>" +
+        "</article>"
+      );
+    }).join("");
+  }
+
+  const SHAPE = { landscape: [800, 600], portrait: [600, 820], square: [700, 700] };
+  const CAT_LABEL = { video: "VIDEO", design: "DESIGN", live: "LIVE" };
+
+  function renderWorks() {
+    const grid = $("#work-grid");
+    if (!grid) return;
+    grid.innerHTML = (C.works || []).map(function (w, i) {
+      const s = SHAPE[w.shape] || SHAPE.landscape;
+      const extra = (w.sample ? '<span class="badge-sample">SAMPLE</span>' : "") + '<span class="work-cat">' + esc(CAT_LABEL[w.category] || w.category) + "</span>";
+      return (
+        '<article class="work-card reveal" data-cat="' + esc(w.category) + '" style="--d:' + (i % 3) + '">' +
+          mediaHTML(w.image, { alt: w.imageAlt || w.title, tone: w.tone, label: (CAT_LABEL[w.category] || "") + " SAMPLE", fit: w.fit, w: s[0], h: s[1], extra: extra }) +
+          '<div class="work-body">' +
+            '<p class="work-meta">' + esc(w.year || "—") + " ／ " + esc(w.dept || "—") + "</p>" +
+            '<h3 class="work-title"><button class="work-open" type="button" data-work="' + i + '" aria-haspopup="dialog">' + esc(w.title) + "</button></h3>" +
+            '<p class="work-desc">' + esc(w.desc) + "</p>" +
+            '<span class="work-more" aria-hidden="true">VIEW DETAIL ' + ICON.plus + "</span>" +
+          "</div>" +
+        "</article>"
+      );
+    }).join("");
+
+    ["all", "video", "design", "live"].forEach(function (cat) {
+      const n = cat === "all" ? (C.works || []).length : (C.works || []).filter(function (w) { return w.category === cat; }).length;
+      const el = $('[data-count="' + cat + '"]');
+      if (el) el.textContent = String(n).padStart(2, "0");
+    });
+  }
+
+  function renderFaq() {
+    const list = $("#faq-list");
+    if (!list) return;
+    list.innerHTML = (C.faqs || []).map(function (f, i) {
+      const n = String(i + 1).padStart(2, "0");
+      return (
+        '<div class="faq-item">' +
+          '<h3><button class="faq-q" type="button" id="faq-q-' + i + '" aria-expanded="false" aria-controls="faq-a-' + i + '">' +
+            '<span class="faq-num" aria-hidden="true">Q.' + n + "</span><span>" + esc(f.q) + '</span><span class="faq-icon" aria-hidden="true"></span>' +
+          "</button></h3>" +
+          '<div class="faq-panel" id="faq-a-' + i + '" role="region" aria-labelledby="faq-q-' + i + '">' +
+            '<div class="faq-panel-inner"><p class="faq-a">' + f.a + "</p></div>" +
+          "</div>" +
+        "</div>"
+      );
+    }).join("");
+  }
+
+  /* ============================ CONFIG LINKS ============================ */
+  let toastTimer;
+  function toast(msg) {
+    const t = $("#toast");
+    if (!t) return;
+    t.textContent = msg;
+    t.classList.add("is-show");
+    clearTimeout(toastTimer);
+    toastTimer = setTimeout(function () { t.classList.remove("is-show"); }, 4200);
+  }
+
+  function setupConfigLinks() {
+    $$("[data-link]").forEach(function (el) {
+      const key = el.dataset.link;
+      const url = (C.links || {})[key];
+      if (isUrl(url)) {
+        el.setAttribute("href", url.trim());
+        el.setAttribute("target", "_blank");
+        el.setAttribute("rel", "noopener noreferrer");
+        const sr = document.createElement("span");
+        sr.className = "visually-hidden";
+        sr.textContent = "（新しいタブで開きます）";
+        el.appendChild(sr);
+      } else {
+        el.removeAttribute("href");
+        el.setAttribute("role", "button");
+        el.setAttribute("tabindex", "0");
+        el.setAttribute("aria-disabled", "true");
+        el.classList.add("is-unset");
+        el.dataset.unset = key;
+        el.title = "URL未設定";
+        const sr = document.createElement("span");
+        sr.className = "visually-hidden";
+        sr.textContent = "（URL未設定）";
+        el.appendChild(sr);
+      }
+    });
+    document.addEventListener("click", function (e) {
+      const el = e.target.closest("[data-unset]");
+      if (!el) return;
+      e.preventDefault();
+      toast((el.dataset.linkLabel || "リンク") + "のURLは現在準備中です。（運用前に設定値 " + el.dataset.unset + " を差し替えてください）");
+    });
+    document.addEventListener("keydown", function (e) {
+      if ((e.key === "Enter" || e.key === " ") && e.target.matches && e.target.matches("[data-unset]")) {
+        e.preventDefault();
+        e.target.click();
+      }
+    });
+  }
+
+  /* ============================ SCROLL LOCK ============================ */
+  let lockCount = 0;
+  function lockScroll() {
+    if (lockCount++ === 0) {
+      const sw = window.innerWidth - document.documentElement.clientWidth;
+      document.documentElement.classList.add("is-locked");
+      if (sw > 0) document.body.style.paddingRight = sw + "px";
+    }
+  }
+  function unlockScroll() {
+    if (lockCount > 0 && --lockCount === 0) {
+      document.documentElement.classList.remove("is-locked");
+      document.body.style.paddingRight = "";
+    }
+  }
+
+  /* =============================== HEADER =============================== */
+  function setupHeader() {
+    const header = $("#site-header");
+    let ticking = false;
+    function update() {
+      header.classList.toggle("is-scrolled", window.scrollY > 24);
+      ticking = false;
+    }
+    window.addEventListener("scroll", function () {
+      if (!ticking) { ticking = true; requestAnimationFrame(update); }
+    }, { passive: true });
+    update();
+  }
+
+  function setupMenu() {
+    const burger = $("#burger");
+    const menu = $("#mobile-menu");
+    const header = $("#site-header");
+    const main = $("#main");
+    const footer = $("footer");
+    let open = false;
+
+    function setOpen(next) {
+      if (next === open) return;
+      open = next;
+      menu.classList.toggle("is-open", open);
+      menu.setAttribute("aria-hidden", String(!open));
+      header.classList.toggle("menu-open", open);
+      burger.setAttribute("aria-expanded", String(open));
+      burger.setAttribute("aria-label", open ? "メニューを閉じる" : "メニューを開く");
+      if ("inert" in HTMLElement.prototype) { main.inert = open; footer.inert = open; }
+      if (open) {
+        lockScroll();
+        const first = $("a", menu);
+        if (first) setTimeout(function () { first.focus(); }, 60);
+      } else {
+        unlockScroll();
+      }
+    }
+    burger.addEventListener("click", function () { setOpen(!open); });
+    $$("a", menu).forEach(function (a) { a.addEventListener("click", function () { setOpen(false); }); });
+    document.addEventListener("keydown", function (e) {
+      if (e.key === "Escape" && open) { setOpen(false); burger.focus(); }
+    });
+    window.addEventListener("resize", function () { if (window.innerWidth > 960 && open) setOpen(false); });
+  }
+
+  function setupNavSpy() {
+    if (!("IntersectionObserver" in window)) return;
+    const links = $$("[data-nav-link]");
+    const io = new IntersectionObserver(function (entries) {
+      entries.forEach(function (en) {
+        if (!en.isIntersecting) return;
+        const key = en.target.dataset.nav;
+        links.forEach(function (a) {
+          const on = a.dataset.navLink === key;
+          a.classList.toggle("is-active", on);
+          if (on) a.setAttribute("aria-current", "true"); else a.removeAttribute("aria-current");
+        });
+      });
+    }, { rootMargin: "-45% 0px -50% 0px" });
+    $$("[data-nav]").forEach(function (s) { io.observe(s); });
+  }
+
+  function setupReveal() {
+    const els = $$(".reveal");
+    if (!("IntersectionObserver" in window) || reducedMotion.matches) {
+      els.forEach(function (el) { el.classList.add("is-visible"); });
+      return;
+    }
+    const io = new IntersectionObserver(function (entries) {
+      entries.forEach(function (en) {
+        if (en.isIntersecting) { en.target.classList.add("is-visible"); io.unobserve(en.target); }
+      });
+    }, { rootMargin: "0px 0px -8% 0px", threshold: 0.05 });
+    els.forEach(function (el) { io.observe(el); });
+  }
+
+  /* =============================== WORKS =============================== */
+  function applyFilter(cat) {
+    const valid = ["all", "video", "design", "live"];
+    if (valid.indexOf(cat) === -1) cat = "all";
+    $$(".filter-btn").forEach(function (b) { b.setAttribute("aria-pressed", String(b.dataset.filter === cat)); });
+    let shown = 0;
+    $$(".work-card").forEach(function (card) {
+      const show = cat === "all" || card.dataset.cat === cat;
+      card.hidden = !show;
+      if (show) {
+        shown++;
+        card.classList.add("is-visible");
+        if (!reducedMotion.matches) {
+          card.classList.remove("pop");
+          void card.offsetWidth;
+          card.classList.add("pop");
+        }
+      }
+    });
+    const label = cat === "all" ? "ALL" : CAT_LABEL[cat];
+    $("#works-count").innerHTML = "<b>" + String(shown).padStart(2, "0") + "</b>ITEMS — " + label;
+  }
+
+  function setupWorks() {
+    $$(".filter-btn").forEach(function (b) {
+      b.addEventListener("click", function () { applyFilter(b.dataset.filter); });
+    });
+    document.addEventListener("click", function (e) {
+      const jump = e.target.closest("[data-filter-jump]");
+      if (jump) applyFilter(jump.dataset.filterJump);
+      const open = e.target.closest(".work-open");
+      if (open) openWork(+open.dataset.work, open);
+    });
+    applyFilter("all");
+  }
+
+  function openWork(index, trigger) {
+    const w = (C.works || [])[index];
+    if (!w) return;
+    const s = SHAPE[w.shape] || SHAPE.landscape;
+    const yt = typeof w.youtubeId === "string" && /^[A-Za-z0-9_-]{11}$/.test(w.youtubeId) ? w.youtubeId : "";
+    const media = $("#work-modal-media");
+    if (yt) {
+      media.innerHTML = '<div class="video-frame"><iframe src="https://www.youtube-nocookie.com/embed/' + yt + '?rel=0" title="' + esc(w.title) + '（YouTube動画）" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen referrerpolicy="strict-origin-when-cross-origin"></iframe></div>';
+    } else {
+      media.innerHTML = mediaHTML(w.image, { alt: w.imageAlt || w.title, tone: w.tone, label: (CAT_LABEL[w.category] || "") + " SAMPLE", fit: "contain", w: s[0], h: s[1] });
+    }
+    $("#work-modal-cat").textContent = CAT_LABEL[w.category] || w.category;
+    $("#work-modal-title").textContent = w.title;
+    $("#work-modal-desc").textContent = w.desc;
+    $("#work-modal-meta").innerHTML =
+      "<dt>CATEGORY</dt><dd>" + esc(CAT_LABEL[w.category] || w.category) + "</dd>" +
+      "<dt>YEAR</dt><dd>" + esc(w.year || "—") + "</dd>" +
+      "<dt>DEPT.</dt><dd>" + esc(w.dept || "—") + "</dd>";
+    $("#work-modal-sample").textContent = w.sample ? "※ これはサンプル作品データです。実際の制作実績ではありません。" : "";
+    $("#work-modal-actions").innerHTML = isUrl(w.url)
+      ? '<a class="btn btn--black" href="' + esc(w.url.trim()) + '" target="_blank" rel="noopener noreferrer">公開ページを見る ' + ICON.external + '<span class="visually-hidden">（新しいタブで開きます）</span></a>'
+      : '<p class="muted">公開リンクは設定されていません。</p>';
+    Modal.open($("#work-modal"), trigger);
+  }
+
+  /* =============================== MODAL =============================== */
+  const Modal = (function () {
+    let active = null;
+    let opener = null;
+    const FOCUSABLE = 'a[href], button:not([disabled]), iframe, input:not([disabled]), select, textarea, [tabindex]:not([tabindex="-1"])';
+
+    function focusables(el) {
+      return $$(FOCUSABLE, el).filter(function (n) { return n.offsetParent !== null || n === document.activeElement; });
+    }
+    function open(el, trigger) {
+      if (active) close(true);
+      active = el;
+      opener = trigger || document.activeElement;
+      el.hidden = false;
+      lockScroll();
+      requestAnimationFrame(function () { requestAnimationFrame(function () { el.classList.add("is-open"); }); });
+      const target = $("[data-autofocus]", el) || $(".modal-close", el);
+      setTimeout(function () { if (target) target.focus({ preventScroll: true }); }, 60);
+    }
+    function close(immediate) {
+      if (!active) return;
+      const el = active;
+      active = null;
+      el.classList.remove("is-open");
+      const done = function () {
+        el.hidden = true;
+        el.dispatchEvent(new CustomEvent("modal:closed"));
+      };
+      if (immediate || reducedMotion.matches) done(); else setTimeout(done, 380);
+      unlockScroll();
+      if (opener && typeof opener.focus === "function") opener.focus({ preventScroll: true });
+      opener = null;
+    }
+    document.addEventListener("click", function (e) {
+      if (!active) return;
+      const c = e.target.closest("[data-modal-close]");
+      if (c && active.contains(c)) close();
+    });
+    document.addEventListener("keydown", function (e) {
+      if (!active) return;
+      if (e.key === "Escape") { e.preventDefault(); close(); return; }
+      if (e.key === "Tab") {
+        const f = focusables(active);
+        if (!f.length) return;
+        const first = f[0], last = f[f.length - 1];
+        if (e.shiftKey && document.activeElement === first) { e.preventDefault(); last.focus(); }
+        else if (!e.shiftKey && document.activeElement === last) { e.preventDefault(); first.focus(); }
+        else if (!active.contains(document.activeElement)) { e.preventDefault(); first.focus(); }
+      }
+    });
+    return { open: open, close: close };
+  })();
+
+  /* ================================ FAQ ================================ */
+  function setupFaq() {
+    $$(".faq-q").forEach(function (btn) {
+      btn.addEventListener("click", function () {
+        const expanded = btn.getAttribute("aria-expanded") === "true";
+        btn.setAttribute("aria-expanded", String(!expanded));
+        btn.closest(".faq-item").classList.toggle("is-open", !expanded);
+      });
+    });
+  }
+
+  /* ================================ TABS ================================ */
+  const tabs = function () { return $$('[role="tab"]'); };
+  function activateTab(name, focus) {
+    tabs().forEach(function (t) {
+      const on = t.dataset.tab === name;
+      t.setAttribute("aria-selected", String(on));
+      t.tabIndex = on ? 0 : -1;
+      if (on && focus) t.focus();
+    });
+    $$(".tab-panel").forEach(function (p) { p.hidden = p.dataset.panel !== name; });
+  }
+  function setupTabs() {
+    tabs().forEach(function (t, i, all) {
+      t.addEventListener("click", function () { activateTab(t.dataset.tab); });
+      t.addEventListener("keydown", function (e) {
+        let idx = null;
+        if (e.key === "ArrowRight" || e.key === "ArrowDown") idx = (i + 1) % all.length;
+        if (e.key === "ArrowLeft" || e.key === "ArrowUp") idx = (i - 1 + all.length) % all.length;
+        if (e.key === "Home") idx = 0;
+        if (e.key === "End") idx = all.length - 1;
+        if (idx !== null) { e.preventDefault(); activateTab(all[idx].dataset.tab, true); }
+      });
+    });
+    document.addEventListener("click", function (e) {
+      const link = e.target.closest("[data-open-form]");
+      if (link) activateTab(link.dataset.openForm);
+    });
+  }
+
+  /* =============================== FORMS =============================== */
+  function setError(field, msg) {
+    const err = document.getElementById(field.id + "-error");
+    if (err) err.textContent = msg;
+    field.setAttribute("aria-invalid", msg ? "true" : "false");
+    const wrap = field.closest(".field");
+    if (wrap) wrap.classList.toggle("has-error", !!msg);
+  }
+  function validate(field) {
+    const v = field.value.trim();
+    const label = field.dataset.label || "この項目";
+    let msg = "";
+    if (field.required && !v) msg = field.tagName === "SELECT" ? label + "を選択してください。" : label + "を入力してください。";
+    else if (field.type === "email" && v && !EMAIL_RE.test(v)) msg = "メールアドレスの形式が正しくありません（例：name@example.com）。";
+    setError(field, msg);
+    return !msg;
+  }
+  const FORM_TITLES = { join: "団員募集・入団希望フォーム（デモ）", request: "制作依頼フォーム（デモ）" };
+
+  function setupForms() {
+    $$("form[data-form-type]").forEach(function (form) {
+      const fields = function () { return $$("[data-validate]", form); };
+      const summary = $(".form-summary", form);
+
+      form.addEventListener("submit", function (e) {
+        e.preventDefault();
+        form.dataset.submitted = "true";
+        const invalid = fields().filter(function (f) { return !validate(f); });
+        if (invalid.length) {
+          summary.hidden = false;
+          summary.textContent = "入力内容に" + invalid.length + "件のエラーがあります。各項目のメッセージをご確認ください。";
+          invalid[0].focus();
+          return;
+        }
+        summary.hidden = true;
+        summary.textContent = "";
+        const submitter = e.submitter || $('[type="submit"]', form);
+        $("#submit-modal-type").textContent = FORM_TITLES[form.dataset.formType] || "お問い合わせフォーム（デモ）";
+        /* デモ：外部送信・保存は一切行わない */
+        form.reset();
+        fields().forEach(function (f) { setError(f, ""); });
+        delete form.dataset.submitted;
+        Modal.open($("#submit-modal"), submitter);
+      });
+
+      form.addEventListener("input", function (e) {
+        if (form.dataset.submitted && e.target.matches("[data-validate]")) validate(e.target);
+      });
+      form.addEventListener("focusout", function (e) {
+        if (e.target.matches && e.target.matches("[data-validate]") && (form.dataset.submitted || e.target.value.trim())) validate(e.target);
+      });
+    });
+  }
+
+  /* ===================== FORMS ON/OFF（個人情報を扱わない） ===================== */
+  function setupDemoForms() {
+    const on = !!(C.features && C.features.demoForms === true);
+    $$("form[data-form-type]").forEach(function (f) { f.hidden = !on; });
+    $$("[data-guide]").forEach(function (g) { g.hidden = on; });
+    const banner = $("#demo-banner");
+    if (banner) banner.hidden = !on;
+  }
+
+  /* ===================== 公開前チェック（?check で表示） ===================== */
+  function collectIssues() {
+    const issues = [];
+    const unset = Array.from(new Set($$("[data-unset]").map(function (el) { return el.dataset.unset; })));
+    if (unset.length) issues.push({ title: "未設定のリンク（設定値）", items: unset });
+    const todos = Array.from(new Set($$("[data-todo]").map(function (el) { return el.textContent.trim(); })));
+    if (todos.length) issues.push({ title: "要確認の表記（フッター「サイト情報」）", items: todos });
+    const ph = $$("img[data-placeholder]").filter(function (i) { return !i.closest("[hidden]"); }).length;
+    if (ph) issues.push({ title: "仮画像（IMAGE PLACEHOLDER）", items: [ph + " 箇所。権利・公開同意を確認済みの画像に差し替えてください"] });
+    const failed = $$("img[data-failed]").map(function (i) { return i.dataset.original || "(不明)"; });
+    if (failed.length) issues.push({ title: "読み込めなかった画像（パスを確認）", items: failed });
+    const badPath = [];
+    function checkPath(v, where) {
+      if (typeof v === "string" && /^(\/|file:|[a-zA-Z]:\\|\\\\)/.test(v.trim())) badPath.push(where + "：" + v);
+    }
+    const imgs = C.images || {};
+    Object.keys(imgs).forEach(function (k) { checkPath(imgs[k].src, "images." + k); });
+    ["departments", "activities", "works"].forEach(function (key) {
+      (C[key] || []).forEach(function (d, i) { checkPath(d.image, key + "[" + i + "]"); });
+    });
+    if (badPath.length) issues.push({ title: "公開先で動作しないパス（\"/\" 始まり・PC内パス）", items: badPath });
+    const samples = (C.works || []).filter(function (w) { return w.sample; }).length;
+    if (samples) issues.push({ title: "サンプル作品データ", items: [samples + " 件（実在の作品ではありません）"] });
+    if (C.features && C.features.demoForms) issues.push({ title: "デモフォーム", items: ["features.demoForms が true です。公開時は false にしてください"] });
+    return issues;
+  }
+
+  function updateCheckPanel() {
+    const panel = document.getElementById("check-panel");
+    if (!panel) return;
+    const issues = collectIssues();
+    const body = issues.length
+      ? issues.map(function (g) {
+          return "<h3>" + esc(g.title) + "</h3><ul>" + g.items.map(function (t) { return "<li>" + esc(t) + "</li>"; }).join("") + "</ul>";
+        }).join("")
+      : '<p class="ok">検出された項目はありません。</p>';
+    panel.innerHTML = '<button type="button" class="check-close">閉じる</button><h2>公開前チェック（?check 表示時のみ）</h2>' + body +
+      '<h3>このチェックで確認できないこと</h3><ul><li>写真・映像・文章の著作権、写っている人物の公開同意</li><li>掲載している活動内容・実績の正確性</li></ul>';
+    $(".check-close", panel).addEventListener("click", function () { panel.remove(); });
+  }
+  window.updateCheckPanel = updateCheckPanel;
+
+  function setupPrepublishCheck() {
+    const issues = collectIssues();
+    if (issues.length && window.console) {
+      console.groupCollapsed("[MCS] 公開前に確認が必要な項目: " + issues.length + " 種類（URL末尾に ?check を付けると画面に一覧表示）");
+      issues.forEach(function (g) { console.warn(g.title, g.items); });
+      console.groupEnd();
+    }
+    if (!/(^|[?&])check(=|&|$)/.test(location.search.slice(1))) return;
+    document.documentElement.classList.add("check-mode");
+    $$("img[loading=lazy]").forEach(function (i) { i.loading = "eager"; });
+    const panel = document.createElement("aside");
+    panel.id = "check-panel";
+    panel.className = "check-panel";
+    panel.setAttribute("aria-label", "公開前チェック");
+    document.body.appendChild(panel);
+    updateCheckPanel();
+    window.addEventListener("load", updateCheckPanel);
+  }
+
+  /* ================================ INIT ================================ */
+  function init() {
+    renderAboutMedia();
+    renderDepartments();
+    renderRoles();
+    renderActivities();
+    renderWorks();
+    renderFaq();
+
+    setupConfigLinks();
+    setupHeader();
+    setupMenu();
+    setupNavSpy();
+    setupWorks();
+    setupFaq();
+    setupTabs();
+    setupForms();
+    setupReveal();
+
+    $("#work-modal").addEventListener("modal:closed", function () { $("#work-modal-media").innerHTML = ""; });
+    setupDemoForms();
+    setupPrepublishCheck();
+  }
+
+  if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", init);
+  else init();
+})();
+</script>
+</body>
+</html>
